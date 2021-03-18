@@ -21,4 +21,12 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);//Time.fixedDeltaTime ensures our movement speed is consistent no matter how many times FixedUpdate is called
     }
+
+    private void OnTriggerEnter2D(Collider2D other) //This doodad is for picking up items
+    {
+        if (other.gameObject.CompareTag("Item"))
+        {
+            other.gameObject.SetActive(false);
+        }
+    }
 }
