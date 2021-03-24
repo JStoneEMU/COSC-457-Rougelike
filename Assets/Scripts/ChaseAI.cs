@@ -28,21 +28,30 @@ public class ChaseAI : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 position = transform.position;
-        if (position == nextPoint && path.Count > 0)
+        if (position == nextPoint)
         {
-            Vector2 nextAction = path[0];
-            path.RemoveAt(0);
-            nextPoint = position + nextAction;
+            GetNextPoint(position);
         }
 
         position = Vector2.MoveTowards(position, nextPoint, moveSpeed * Time.deltaTime);
         rb.MovePosition(position);
     }
 
+    void GetNextPoint(Vector2 position)
+    {
+        if (path.Count > 0)
+        {
+            Vector2 nextAction = path[0];
+            path.RemoveAt(0);
+            nextPoint = position + nextAction;
+        }
+    }
+
     void Search()
     {
-        PositionSearchProblem problem = new PositionSearchProblem(transform.position, target.transform.position, colliderSize, 1);
+        PositionSearchProblem problem = new PositionSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z);
         path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
+        GetNextPoint(transform.position);
 
         Invoke("Search", secondsBetweenAI);
     }
@@ -53,14 +62,16 @@ public class PositionSearchProblem : SearchProblem<Vector2Int, Vector2Int>
     private Vector2Int start;
     private Vector2Int goal;
     private Vector2 colliderSize;
+    private float angle;
     private int moveSpeed;
 
-    public PositionSearchProblem(Vector2 s, Vector2 g, Vector2 cSize, int speed)
+    public PositionSearchProblem(Vector2 s, Vector2 g, Vector2 cSize, int speed, float a)
     {
         start = Vector2Int.RoundToInt(s);
         goal = Vector2Int.RoundToInt(g);
         colliderSize = cSize;
         moveSpeed = speed;
+        angle = a;
     }
 
     public Vector2Int GetStartState()
@@ -69,7 +80,12 @@ public class PositionSearchProblem : SearchProblem<Vector2Int, Vector2Int>
     }
     public float GetCost(List<Vector2Int> actions)
     {
-        return actions.Count * moveSpeed;
+        float totalDistance = 0;
+        foreach (Vector2Int action in actions)
+        {
+            totalDistance += Vector2Int.Distance(Vector2Int.zero, action);
+        }
+        return totalDistance;
     }
     public float Heuristic(Vector2Int state)
     {
@@ -91,7 +107,7 @@ public class PositionSearchProblem : SearchProblem<Vector2Int, Vector2Int>
                 Vector2Int nextState = state + nextAction;
 
                 int layerMask = 1 << 6;
-                Collider2D hit = Physics2D.OverlapBox(nextState, colliderSize, 0, layerMask);
+                Collider2D hit = Physics2D.OverlapBox(nextState, colliderSize, angle, layerMask);
                 if (hit != null)
                 {
                     continue;
