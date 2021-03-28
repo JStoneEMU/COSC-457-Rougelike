@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Minimax;
 
 public class MinimaxSearchAI : MonoBehaviour
 {
+    public int maxDepth = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +25,7 @@ public class MinimaxSearchAI : MonoBehaviour
         {
             return (EvaluationFunction(gameState), null);
         }
-        if (agentIndex == playerIndex)
+        if (agentIndex == gameState.GetPlayerIndex())
         {
             return MinValue(gameState, agentIndex, depth, alpha, beta);
         }
@@ -34,7 +37,12 @@ public class MinimaxSearchAI : MonoBehaviour
 
     private (float, Action) MaxValue(State gameState, int agentIndex, int depth, float alpha, float beta)
     {
-        int nextAgentIndex = NextAgentIndex(agentIndex);
+        int nextAgentIndex = agentIndex + 1;
+        if (gameState.GetNumAgents() == nextAgentIndex)
+        {
+            nextAgentIndex = 0;
+            depth = depth + 1;
+        }
 
         float bestValue = float.NegativeInfinity;
         Action bestAction = null;
@@ -52,14 +60,19 @@ public class MinimaxSearchAI : MonoBehaviour
             {
                 return (bestValue, bestAction);
             }
-            alpha = Math.Max(alpha, bestValue);
+            alpha = System.Math.Max(alpha, bestValue);
         }
         return (bestValue, bestAction);
     }
 
     private (float, Action) MinValue(State gameState, int agentIndex, int depth, float alpha, float beta)
     {
-        int nextAgentIndex = NextAgentIndex(agentIndex);
+        int nextAgentIndex = agentIndex + 1;
+        if (gameState.GetNumAgents() == nextAgentIndex)
+        {
+            nextAgentIndex = 0;
+            depth = depth + 1;
+        }
 
         float bestValue = float.PositiveInfinity;
         Action bestAction = null;
@@ -77,19 +90,13 @@ public class MinimaxSearchAI : MonoBehaviour
             {
                 return (bestValue, bestAction);
             }
-            beta = Math.Min(beta, bestValue);
+            beta = System.Math.Min(beta, bestValue);
         }
         return (bestValue, bestAction);
     }
 
-    private int NextAgentIndex(int agentIndex)
+    private float EvaluationFunction(State gameState)
     {
-        int nextAgentIndex = agentIndex + 1;
-        if (gameState.GetNumAgents() == nextAgentIndex)
-        {
-            nextAgentIndex = 0;
-            depth = depth + 1;
-        }
-        return nextAgentIndex;
+        return 0;
     }
 }
