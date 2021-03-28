@@ -106,12 +106,13 @@ namespace Minimax
                     if (i != playerIndex)
                     {
                         Vector2 enemyPos = agentList[i].Position;
-                        if (Vector2.Distance(agent.Position, enemyPos) <= agent.AttackRange)
+                        float distance = Vector2.Distance(agent.Position, enemyPos);
+                        if (distance <= agent.AttackRange)
                         {
                             int layerMask = 1 << 6; // BlockingLayer (walls etc.)
                             Vector2 relativeAttackPos = enemyPos - agent.Position;
                             // Check if there's a wall in the way
-                            RaycastHit2D hit = Physics2D.Raycast(agent.Position, relativeAttackPos, agent.AttackRange, layerMask);
+                            RaycastHit2D hit = Physics2D.Raycast(agent.Position, relativeAttackPos, distance, layerMask);
                             if (hit.collider == null)   // Nothing in the way
                             {
                                 Action attackAction = new Action(relativeAttackPos, Action.Type.Attack, i);
@@ -125,12 +126,13 @@ namespace Minimax
             else
             {
                 Vector2 playerPos = agentList[playerIndex].Position;
-                if (Vector2.Distance(agent.Position, playerPos) <= agent.AttackRange)
+                float distance = Vector2.Distance(agent.Position, playerPos);
+                if (distance <= agent.AttackRange)
                 {
                     int layerMask = 1 << 6; // BlockingLayer (walls etc.)
                     Vector2 relativeAttackPos = playerPos - agent.Position;
                     // Check if there's a wall in the way
-                    RaycastHit2D hit = Physics2D.Raycast(agent.Position, relativeAttackPos, agent.AttackRange, layerMask);
+                    RaycastHit2D hit = Physics2D.Raycast(agent.Position, relativeAttackPos, distance, layerMask);
                     if (hit.collider == null)   // Nothing in the way
                     {
                         Action attackAction = new Action(relativeAttackPos, Action.Type.Attack, playerIndex);
@@ -142,7 +144,7 @@ namespace Minimax
             // Check all 8 directions
             for (int x = -1; x <= 1; x++)
             {
-                for (int y = -1; x <= 1; y++)
+                for (int y = -1; y <= 1; y++)
                 {
                     Vector2 move = new Vector2(x, y);
                     // Make vector length = 1 even if its diagonal
@@ -178,7 +180,7 @@ namespace Minimax
             }
             else if (action.ActionType == Action.Type.Move)
             {
-                agent.Position = action.Position;
+                agent.Position += action.Position;
             }
 
             return new State(newAgentList, playerIndex, timeBetweenStates);
@@ -192,6 +194,18 @@ namespace Minimax
         public int GetPlayerIndex()
         {
             return playerIndex;
+        }
+
+        public List<Agent> GetEnemies()
+        {
+            List<Agent> enemyList = new List<Agent>(agentList);
+            enemyList.RemoveAt(playerIndex);
+            return enemyList;
+        }
+
+        public Agent GetPlayer()
+        {
+            return agentList[playerIndex];
         }
     }
 }

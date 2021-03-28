@@ -5,18 +5,58 @@ using Minimax;
 
 public class MinimaxSearchAI : MonoBehaviour
 {
+    public GameObject player;
     public int maxDepth = 2;
+    public float secondsBetweenAI = .2f;
+
+    private Action[] nextActions;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Invoke("MinimaxSearch", 1);
     }
 
-    // Update is called once per frame
-    void Update()
+    void MinimaxSearch()
     {
-        
+        List<Agent> agentList = new List<Agent>();
+        List<GameObject> agentObjectList = new List<GameObject>();
+
+        GameObject[] smartEnemyArr = GameObject.FindGameObjectsWithTag("SmartEnemy");
+
+        foreach (GameObject smartEnemy in smartEnemyArr)
+        {
+            agentObjectList.Add(smartEnemy);
+
+            // TEMPORARY HARD-CODED VALUES
+            agentList.Add(new Agent(smartEnemy.transform.position, 100, 5, 1, 5, new Vector2(1, 1)));
+        }
+
+        agentObjectList.Add(player);
+
+        // TEMPORARY HARD-CODED VALUES
+        agentList.Add(new Agent(player.transform.position, 100, 5, 5, 5, new Vector2(0.4f, 0.4f)));
+
+        int playerIndex = agentList.Count - 1;
+        nextActions = new Action[agentList.Count];
+        State gameState = new State(agentList, playerIndex, secondsBetweenAI);
+        float initialAlpha = float.NegativeInfinity;
+        float initialBeta = float.PositiveInfinity;
+
+        (float value, Action action) thisV = Value(gameState, 0, 0, initialAlpha, initialBeta);
+        //print("Returned: " + thisV.action.Position);
+
+        // Give actions to smart enemies
+        for (int i = 0; i < playerIndex; i++)
+        {
+            if (nextActions[i] != null)
+            {
+                print("Stored: " + nextActions[i].Position);
+                print(nextActions[i].ActionType);
+            }
+        }
+
+        Invoke("MinimaxSearch", secondsBetweenAI);
     }
 
     (float, Action) Value(State gameState, int agentIndex, int depth, float alpha, float beta)
@@ -31,7 +71,9 @@ public class MinimaxSearchAI : MonoBehaviour
         }
         else    // Enemy
         {
-            return MaxValue(gameState, agentIndex, depth, alpha, beta);
+            (float value, Action action) max = MaxValue(gameState, agentIndex, depth, alpha, beta);
+            nextActions[agentIndex] = max.action;
+            return max;
         }
     }
 
@@ -97,6 +139,15 @@ public class MinimaxSearchAI : MonoBehaviour
 
     private float EvaluationFunction(State gameState)
     {
-        return 0;
+        Agent player = gameState.GetPlayer();
+        List<Agent> enemies = gameState.GetEnemies();
+
+        float sumDistance = 0;
+        foreach (Agent enemy in enemies)
+        {
+            sumDistance += Vector2.Distance(enemy.Position, player.Position);
+        }
+
+        return -sumDistance;
     }
 }
