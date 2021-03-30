@@ -139,13 +139,25 @@ public class MinimaxSearchAI : MonoBehaviour
         List<Agent> enemies = gameState.GetEnemies();
 
         float sumDistance = 0;
+        float spread = 0;
         int sumHealth = 0;
         foreach (Agent enemy in enemies)
         {
-            sumDistance += Vector2.Distance(enemy.Position, player.Position);
+            sumDistance += Mathf.Max(enemy.AttackRange, Vector2.Distance(enemy.Position, player.Position));
             sumHealth += enemy.Health;
+
+            float minSpread = float.PositiveInfinity;
+            foreach (Agent other in enemies)
+            {
+                if (enemy != other)
+                {
+                    float dist = Vector2.Distance(enemy.Position, other.Position);
+                    minSpread = Mathf.Min(minSpread, dist);
+                }
+            }
+            spread += minSpread;
         }
 
-        return (sumHealth / 10) - player.Health - sumDistance;
+        return (sumHealth / 10) - player.Health - sumDistance + (spread / 2);
     }
 }
