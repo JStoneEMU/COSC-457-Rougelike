@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   moveSpeed: 5
-  secondsBetweenAI: 1
+  secondsBetweenAI: 0.2
 --- !u!50 &5969560799163229551
 Rigidbody2D:
   serializedVersion: 4

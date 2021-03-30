@@ -40,10 +40,8 @@ public class MinimaxSearchAI : MonoBehaviour
         int playerIndex = agentList.Count - 1;
         nextActions = new Action[agentList.Count];
         State gameState = new State(agentList, playerIndex, secondsBetweenAI);
-        float initialAlpha = float.NegativeInfinity;
-        float initialBeta = float.PositiveInfinity;
 
-        (float value, Action action) thisV = Value(gameState, 0, 0, initialAlpha, initialBeta);
+        (float value, Action action) thisV = Value(gameState, 0, 0);
         //print("Returned: " + thisV.action.Position);
 
         // Give actions to smart enemies
@@ -51,8 +49,8 @@ public class MinimaxSearchAI : MonoBehaviour
         {
             if (nextActions[i].ActionType == Action.Type.Attack)
             {
-                print("Stored: " + nextActions[i].Position);
-                print(nextActions[i].ActionType);
+                //print("Stored: " + nextActions[i].Position);
+               // print(nextActions[i].ActionType);
             }
 
             MinimaxEnemy enemy = smartEnemyArr[i].GetComponent<MinimaxEnemy>();
@@ -69,7 +67,7 @@ public class MinimaxSearchAI : MonoBehaviour
         Invoke("MinimaxSearch", secondsBetweenAI);
     }
 
-    (float, Action) Value(State gameState, int agentIndex, int depth, float alpha, float beta)
+    (float, Action) Value(State gameState, int agentIndex, int depth)
     {
         if (gameState.IsLose() || gameState.IsWin() || depth == maxDepth)
         {
@@ -77,17 +75,17 @@ public class MinimaxSearchAI : MonoBehaviour
         }
         if (agentIndex == gameState.GetPlayerIndex())
         {
-            return MinValue(gameState, agentIndex, depth, alpha, beta);
+            return MinValue(gameState, agentIndex, depth);
         }
         else    // Enemy
         {
-            (float value, Action action) max = MaxValue(gameState, agentIndex, depth, alpha, beta);
+            (float value, Action action) max = MaxValue(gameState, agentIndex, depth);
             nextActions[agentIndex] = max.action;
             return max;
         }
     }
 
-    private (float, Action) MaxValue(State gameState, int agentIndex, int depth, float alpha, float beta)
+    private (float, Action) MaxValue(State gameState, int agentIndex, int depth)
     {
         int nextAgentIndex = agentIndex + 1;
         if (gameState.GetNumAgents() == nextAgentIndex)
@@ -101,23 +99,17 @@ public class MinimaxSearchAI : MonoBehaviour
         foreach (Action action in gameState.GetLegalActions(agentIndex))
         {
             State nextGameState = gameState.GenerateSuccessor(agentIndex, action);
-            (float value, Action nextAction) next = Value(nextGameState, nextAgentIndex, depth, alpha, beta);
+            (float value, Action nextAction) next = Value(nextGameState, nextAgentIndex, depth);
             if (bestValue < next.value)
             {
                 bestValue = next.value;
                 bestAction = action;
             }
-            // Alpha beta pruning
-            if (bestValue > beta)
-            {
-                return (bestValue, bestAction);
-            }
-            alpha = System.Math.Max(alpha, bestValue);
         }
         return (bestValue, bestAction);
     }
 
-    private (float, Action) MinValue(State gameState, int agentIndex, int depth, float alpha, float beta)
+    private (float, Action) MinValue(State gameState, int agentIndex, int depth)
     {
         int nextAgentIndex = agentIndex + 1;
         if (gameState.GetNumAgents() == nextAgentIndex)
@@ -131,18 +123,12 @@ public class MinimaxSearchAI : MonoBehaviour
         foreach(Action action in gameState.GetLegalActions(agentIndex))
         {
             State nextGameState = gameState.GenerateSuccessor(agentIndex, action);
-            (float value, Action nextAction) next = Value(nextGameState, nextAgentIndex, depth, alpha, beta);
+            (float value, Action nextAction) next = Value(nextGameState, nextAgentIndex, depth);
             if (bestValue > next.value)
             {
                 bestValue = next.value;
                 bestAction = action;
             }
-            // Alpha beta pruning
-            if (bestValue < alpha)
-            {
-                return (bestValue, bestAction);
-            }
-            beta = System.Math.Min(beta, bestValue);
         }
         return (bestValue, bestAction);
     }
@@ -153,14 +139,13 @@ public class MinimaxSearchAI : MonoBehaviour
         List<Agent> enemies = gameState.GetEnemies();
 
         float sumDistance = 0;
+        int sumHealth = 0;
         foreach (Agent enemy in enemies)
         {
             sumDistance += Vector2.Distance(enemy.Position, player.Position);
+            sumHealth += enemy.Health;
         }
 
-        return -sumDistance;
-
-        //return -player.Health;
-        //return 0;
+        return (sumHealth / 10) - player.Health - sumDistance;
     }
 }
