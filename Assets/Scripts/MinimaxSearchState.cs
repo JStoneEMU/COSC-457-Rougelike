@@ -98,6 +98,10 @@ namespace Minimax
             List<Action> legalActions = new List<Action>();
             Agent agent = agentList[agentIndex];
 
+            // Not moving is always a legal action
+            Action noMoveAction = new Action(Vector2.zero, Action.Type.Move);
+            legalActions.Add(noMoveAction);
+
             // Player can attack non-players
             if (agentIndex == playerIndex)
             {
@@ -146,19 +150,22 @@ namespace Minimax
             {
                 for (int y = -1; y <= 1; y++)
                 {
-                    Vector2 move = new Vector2(x, y);
-                    // Make vector length = 1 even if its diagonal
-                    move.Normalize();
-                    move = move * agent.MoveSpeed * timeBetweenStates;
-
-                    // Check for collision
-                    Vector2 nextPos = agent.Position + move;
-                    int layerMask = 1 << 6; // BlockingLayer (walls etc.)
-                    Collider2D hit = Physics2D.OverlapBox(nextPos, agent.ColliderSize, 0, layerMask);
-                    if (hit == null)    // No collision
+                    if (x != 0 || y != 0)   // movement
                     {
-                        Action moveAction = new Action(move, Action.Type.Move);
-                        legalActions.Add(moveAction);
+                        Vector2 move = new Vector2(x, y);
+                        // Make vector length = 1 even if its diagonal
+                        move.Normalize();
+                        move = move * agent.MoveSpeed * timeBetweenStates;
+
+                        // Check for collision
+                        Vector2 nextPos = agent.Position + move;
+                        int layerMask = 1 << 6; // BlockingLayer (walls etc.)
+                        Collider2D hit = Physics2D.OverlapBox(nextPos, agent.ColliderSize, 0, layerMask);
+                        if (hit == null)    // No collision
+                        {
+                            Action moveAction = new Action(move, Action.Type.Move);
+                            legalActions.Add(moveAction);
+                        }
                     }
                 }
             }

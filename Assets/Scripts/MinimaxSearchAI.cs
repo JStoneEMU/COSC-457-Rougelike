@@ -49,10 +49,20 @@ public class MinimaxSearchAI : MonoBehaviour
         // Give actions to smart enemies
         for (int i = 0; i < playerIndex; i++)
         {
-            if (nextActions[i] != null)
+            if (nextActions[i].ActionType == Action.Type.Attack)
             {
                 print("Stored: " + nextActions[i].Position);
                 print(nextActions[i].ActionType);
+            }
+
+            MinimaxEnemy enemy = smartEnemyArr[i].GetComponent<MinimaxEnemy>();
+            if (enemy != null && nextActions[i] != null)
+            {
+                if (nextActions[i].ActionType == Action.Type.Move)
+                {
+
+                    enemy.Move(nextActions[i].Position);
+                }
             }
         }
 
@@ -149,5 +159,8 @@ public class MinimaxSearchAI : MonoBehaviour
         }
 
         return -sumDistance;
+
+        //return player.Health;
+        //return 0;
     }
 }
