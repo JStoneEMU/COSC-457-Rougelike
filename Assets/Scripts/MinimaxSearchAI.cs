@@ -160,7 +160,7 @@ public class MinimaxSearchAI : MonoBehaviour
 
         return -sumDistance;
 
-        //return player.Health;
+        //return -player.Health;
         //return 0;
     }
 }
