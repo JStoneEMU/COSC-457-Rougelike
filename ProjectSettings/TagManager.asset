@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Item
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullet
   - Water
   - UI
   - BlockingLayer
