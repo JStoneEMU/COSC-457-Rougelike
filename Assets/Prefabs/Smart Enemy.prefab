@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 6427901539638306727}
   - component: {fileID: 6427901539638306726}
   - component: {fileID: 5690828362966916672}
+  - component: {fileID: -4064982567102774687}
   - component: {fileID: 2372744797784181656}
   - component: {fileID: 2060681682825855314}
   m_Layer: 0
   m_Name: Smart Enemy
-  m_TagString: SmartEnemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +102,22 @@ MonoBehaviour:
   attackRange: 5
   attackDamage: 1
   maxHealth: 10
+--- !u!114 &-4064982567102774687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427901539638306725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0491d6f62f2e97342ad0ce8d4fae3a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  sightDistance: 5
+  moveSpeed: 5
+  secondsBetweenAI: 0.2
 --- !u!50 &2372744797784181656
 Rigidbody2D:
   serializedVersion: 4

@@ -14,6 +14,7 @@ public class MinimaxEnemy : MonoBehaviour
     private Vector2 nextPoint;
     private Rigidbody2D rb;
     private State currentState = State.None;
+    private SeekAI seekComponent;
 
     enum State
     {
@@ -25,6 +26,7 @@ public class MinimaxEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        seekComponent = GetComponent<SeekAI>();
         rb = GetComponent<Rigidbody2D>();
         nextPoint = transform.position;
         CurrentHealth = maxHealth;
@@ -32,12 +34,26 @@ public class MinimaxEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        // If found target, and number enemies using Minimax is < 3, use Minimax (by tagging self as "SmartEnemy")
+        if (seekComponent != null && seekComponent.enabled)
+        {
+            if (seekComponent.CurrentState == SeekAI.State.Found)
+            {
+                if (tag == "Untagged")
+                {
+                    GameObject[] smartEnemyArr = GameObject.FindGameObjectsWithTag("SmartEnemy");
+                    if (smartEnemyArr.Length < 3)
+                    {
+                        tag = "SmartEnemy";
+                        seekComponent.enabled = false;
+                    }
+                }
+            }
+        }
+
         if (currentState == State.Move)
         {
             Vector2 position = transform.position;
-
-/*            print("Premove position: " + position);
-            print("Moving to: " + nextPoint);*/
 
             //if (Vector2.Distance(position, nextPoint) > 0.001)
             if (position != nextPoint)
@@ -57,10 +73,6 @@ public class MinimaxEnemy : MonoBehaviour
         Vector2 position = transform.position;
         nextPoint = position + relativePos;
         currentState = State.Move;
-
-/*        print("Move: " + relativePos);
-        print("Position: " + position);
-        print("New next point: " + nextPoint);*/
     }
 
 }
