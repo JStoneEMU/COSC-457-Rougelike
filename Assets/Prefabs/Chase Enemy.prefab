@@ -100,6 +100,7 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 5
   secondsBetweenAI: 0.2
+  followDistance: 1
 --- !u!50 &5969560799163229551
 Rigidbody2D:
   serializedVersion: 4
