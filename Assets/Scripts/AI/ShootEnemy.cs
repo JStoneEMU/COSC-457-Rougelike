@@ -37,12 +37,10 @@ public class ShootEnemy : MonoBehaviour
                     shootingComponent.ShootAt(attackAngle);
                     shotTimer = shotCooldown;
                 }
-                else
-                {
-                    shotTimer -= Time.deltaTime;
-                }
             }
         }
+        if (shotTimer > 0)
+            shotTimer -= Time.deltaTime;
     }
 
 }

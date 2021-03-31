@@ -61,15 +61,13 @@ public class SeekAI : MonoBehaviour
     void GetNextPoint(Vector2 position)
     {
         if (path.Count > 0)
-        {
-            CurrentState = State.Seek;
+        {           
             Vector2 nextAction = path[0];
             path.RemoveAt(0);
             nextPoint = position + nextAction;
-        }
-        else if (CurrentState == State.Seek)
-        {
-            CurrentState = State.Found;
+
+            if (path.Count == 0)
+                CurrentState = State.Found;
         }
     }
 
@@ -79,6 +77,15 @@ public class SeekAI : MonoBehaviour
         {
             SightlineSearchProblem problem = new SightlineSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z, sightDistance);
             path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
+
+            if (path.Count > 0)
+            {
+                CurrentState = State.Seek;
+            }
+            else
+            {
+                CurrentState = State.Found;
+            }
 
             GetNextPoint(transform.position);
         }
