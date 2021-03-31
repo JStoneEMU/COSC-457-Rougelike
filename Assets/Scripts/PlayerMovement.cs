@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
 
     public HealthBar healthBar;
 
+    public float invincibilityTimeOnHit = 1;
+
+    private float invincibilityTimer = 0;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -36,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        if (invincibilityTimer > 0)
+            invincibilityTimer -= Time.deltaTime;
     }
 
     void setSpeed(float speed)
@@ -55,6 +62,18 @@ public class PlayerMovement : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "SmartEnemy")
+        {
+            if (invincibilityTimer <= 0)
+            {
+                TakeDamage(1);
+                invincibilityTimer = invincibilityTimeOnHit;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) 

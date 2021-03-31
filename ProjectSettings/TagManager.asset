@@ -9,6 +9,7 @@ TagManager:
   - SmartEnemy
   - HealthPack
   - SpeedPowerup
+  - Enemy
   layers:
   - Default
   - TransparentFX
