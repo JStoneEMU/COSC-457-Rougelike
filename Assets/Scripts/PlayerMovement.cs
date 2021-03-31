@@ -57,16 +57,9 @@ public class PlayerMovement : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(collision.gameObject.tag == "Bullet")
-        {
-            TakeDamage(1);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) //This doodad is for picking up items
-    {
+        //This doodad is for picking up items
         if (other.gameObject.CompareTag("SpeedPowerup"))
         {
             setSpeed(10f);
@@ -77,6 +70,12 @@ public class PlayerMovement : MonoBehaviour
             currentHealth = maxHealth;
             healthBar.SetMaxHealth(maxHealth);
             other.gameObject.SetActive(false);
+        }
+
+        // take damage when hit by bullet
+        if (other.gameObject.tag == "Bullet")
+        {
+            TakeDamage(1);
         }
     }
 }
