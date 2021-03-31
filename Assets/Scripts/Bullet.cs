@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     public GameObject Source { get; set; }   // entity that fired the bullet
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         //GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         if (collision.gameObject != Source)

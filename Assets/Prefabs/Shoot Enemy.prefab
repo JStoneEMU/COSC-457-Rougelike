@@ -209,4 +209,4 @@ MonoBehaviour:
   takeInput: 0
   firePoint: {fileID: 1812354664}
   bulletPrefab: {fileID: 7073453591373087493, guid: 55d1274ec6985dc4bb39361362e4aa41, type: 3}
-  bulletForce: 20
+  bulletForce: 5
