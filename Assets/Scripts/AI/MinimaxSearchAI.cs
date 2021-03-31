@@ -6,7 +6,7 @@ using Minimax;
 public class MinimaxSearchAI : MonoBehaviour
 {
     public GameObject player;
-    public int maxDepth = 2;
+    public int maxDepth = 1;
     public float secondsBetweenAI = .2f;
 
     private Action[] nextActions;
@@ -47,19 +47,16 @@ public class MinimaxSearchAI : MonoBehaviour
         // Give actions to smart enemies
         for (int i = 0; i < playerIndex; i++)
         {
-            if (nextActions[i].ActionType == Action.Type.Attack)
-            {
-                //print("Stored: " + nextActions[i].Position);
-               // print(nextActions[i].ActionType);
-            }
-
             MinimaxEnemy enemy = smartEnemyArr[i].GetComponent<MinimaxEnemy>();
             if (enemy != null && nextActions[i] != null)
             {
                 if (nextActions[i].ActionType == Action.Type.Move)
                 {
-
                     enemy.Move(nextActions[i].Position);
+                }
+                else if (nextActions[i].ActionType == Action.Type.Attack)
+                {
+                    enemy.Attack(nextActions[i].Position);
                 }
             }
         }
@@ -155,9 +152,13 @@ public class MinimaxSearchAI : MonoBehaviour
                     minSpread = Mathf.Min(minSpread, dist);
                 }
             }
-            spread += minSpread;
+
+            if (minSpread != float.PositiveInfinity)
+                spread += minSpread;
         }
 
         return (sumHealth / 10) - player.Health - sumDistance + (spread / 2);
+
+        //return -player.Health;
     }
 }

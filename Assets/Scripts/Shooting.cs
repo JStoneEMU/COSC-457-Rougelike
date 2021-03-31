@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-
+    public bool takeInput = false;
     public Transform firePoint;
     public GameObject bulletPrefab;
 
@@ -13,7 +13,7 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(takeInput && Input.GetButtonDown("Fire1"))
         {
             Shoot();
         }
@@ -27,5 +27,10 @@ public class Shooting : MonoBehaviour
     
     }
 
-
+    public void ShootAt(Vector2 relativeLocation)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(relativeLocation * bulletForce, ForceMode2D.Impulse);
+    }
 }

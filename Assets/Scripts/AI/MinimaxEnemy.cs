@@ -8,6 +8,7 @@ public class MinimaxEnemy : MonoBehaviour
     public float attackRange = 5f;
     public int attackDamage = 1;
     public int maxHealth = 10;
+    public float shotCooldown = 2;
 
     public int CurrentHealth { get; set; }
 
@@ -15,6 +16,8 @@ public class MinimaxEnemy : MonoBehaviour
     private Rigidbody2D rb;
     private State currentState = State.None;
     private SeekAI seekComponent;
+    private Shooting shootingComponent;
+    private float shotTimer = 0;
 
     enum State
     {
@@ -27,12 +30,13 @@ public class MinimaxEnemy : MonoBehaviour
     void Start()
     {
         seekComponent = GetComponent<SeekAI>();
+        shootingComponent = GetComponent<Shooting>();
         rb = GetComponent<Rigidbody2D>();
         nextPoint = transform.position;
         CurrentHealth = maxHealth;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // If found target, and number enemies using Minimax is < 3, use Minimax (by tagging self as "SmartEnemy")
         if (seekComponent != null && seekComponent.enabled)
@@ -51,6 +55,14 @@ public class MinimaxEnemy : MonoBehaviour
             }
         }
 
+        if (shotTimer > 0)
+        {
+            shotTimer -= Time.deltaTime;
+        }
+    }
+
+    void FixedUpdate()
+    {
         if (currentState == State.Move)
         {
             Vector2 position = transform.position;
@@ -73,6 +85,18 @@ public class MinimaxEnemy : MonoBehaviour
         Vector2 position = transform.position;
         nextPoint = position + relativePos;
         currentState = State.Move;
+    }
+
+    public void Attack(Vector2 relativePos)
+    {
+        if (shootingComponent != null)
+        {
+            if (shotTimer <= 0)
+            {
+                shootingComponent.ShootAt(relativePos);
+                shotTimer = shotCooldown;
+            }
+        }
     }
 
 }
