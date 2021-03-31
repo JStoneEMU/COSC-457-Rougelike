@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -43,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (invincibilityTimer > 0)
             invincibilityTimer -= Time.deltaTime;
+
+        if (currentHealth <= 0)
+            SceneManager.LoadScene("SampleScene");
     }
 
     void setSpeed(float speed)
@@ -95,6 +99,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Bullet")
         {
             TakeDamage(1);
+        }
+
+        if (other.gameObject.tag == "Finish")
+        {
+            SceneManager.LoadScene("SampleScene");
         }
     }
 }

@@ -2845,9 +2845,10 @@ GameObject:
   - component: {fileID: 867830844}
   - component: {fileID: 867830846}
   - component: {fileID: 867830845}
+  - component: {fileID: 867830847}
   m_Layer: 5
   m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2868,8 +2869,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.1, y: 12.4}
-  m_SizeDelta: {x: 10, y: 5}
+  m_AnchoredPosition: {x: 25.4909, y: 13.3137}
+  m_SizeDelta: {x: 8.7817, y: 3.1726}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &867830845
 MonoBehaviour:
@@ -2968,6 +2969,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867830843}
   m_CullTransparentMesh: 1
+--- !u!61 &867830847
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867830843}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &878405470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4983,11 +5010,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6427901539638306727, guid: 87a2d75a9eef0144fb17e6e3ff206eaa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.748708
+      value: -10.77
       objectReference: {fileID: 0}
     - target: {fileID: 6427901539638306727, guid: 87a2d75a9eef0144fb17e6e3ff206eaa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -26.506456
+      value: -26.67
       objectReference: {fileID: 0}
     - target: {fileID: 6427901539638306727, guid: 87a2d75a9eef0144fb17e6e3ff206eaa, type: 3}
       propertyPath: m_LocalPosition.z
