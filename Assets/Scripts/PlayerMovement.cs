@@ -38,6 +38,10 @@ public class PlayerMovement : MonoBehaviour
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
+    void setSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
     void FixedUpdate() 
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);//Time.fixedDeltaTime ensures our movement speed is consistent no matter how many times FixedUpdate is called
@@ -63,8 +67,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) //This doodad is for picking up items
     {
-        if (other.gameObject.CompareTag("Item"))
+        if (other.gameObject.CompareTag("SpeedPowerup"))
         {
+            setSpeed(10f);
+            other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("HealthPack"))
+        {
+            currentHealth = maxHealth;
+            healthBar.SetMaxHealth(maxHealth);
             other.gameObject.SetActive(false);
         }
     }
