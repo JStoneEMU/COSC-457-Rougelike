@@ -15,6 +15,7 @@ public class SeekAI : MonoBehaviour
     private Vector2 nextPoint;
     private Vector2 colliderSize;
     private Rigidbody2D rb;
+    private bool visible = false;
 
     public enum State
     {
@@ -33,6 +34,16 @@ public class SeekAI : MonoBehaviour
         colliderSize = collider.size;
 
         Invoke("Search", 1f);
+    }
+
+    void OnBecameVisible()
+    {
+        visible = true;
+    }
+
+    void OnBecameInvisible()
+    {
+        visible = false;
     }
 
     void FixedUpdate()
@@ -64,10 +75,13 @@ public class SeekAI : MonoBehaviour
 
     void Search()
     {
-        SightlineSearchProblem problem = new SightlineSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z, sightDistance);
-        path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
+        if (visible)
+        {
+            SightlineSearchProblem problem = new SightlineSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z, sightDistance);
+            path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
 
-        GetNextPoint(transform.position);
+            GetNextPoint(transform.position);
+        }
 
         Invoke("Search", secondsBetweenAI);
     }

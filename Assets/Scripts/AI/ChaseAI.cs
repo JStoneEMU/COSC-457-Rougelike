@@ -13,6 +13,7 @@ public class ChaseAI : MonoBehaviour
     private Vector2 nextPoint;
     private Vector2 colliderSize;
     private Rigidbody2D rb;
+    private bool visible = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,16 @@ public class ChaseAI : MonoBehaviour
         colliderSize = collider.size;
 
         Invoke("Search", 1f);
+    }
+
+    void OnBecameVisible()
+    {
+        visible = true;
+    }
+
+    void OnBecameInvisible()
+    {
+        visible = false;
     }
 
     void FixedUpdate()
@@ -50,10 +61,12 @@ public class ChaseAI : MonoBehaviour
 
     void Search()
     {
-        PositionSearchProblem problem = new PositionSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z, followDistance);
-        path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
-        GetNextPoint(transform.position);
-
+        if (visible)
+        {
+            PositionSearchProblem problem = new PositionSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z, followDistance);
+            path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
+            GetNextPoint(transform.position);          
+        }
         Invoke("Search", secondsBetweenAI);
     }
 }

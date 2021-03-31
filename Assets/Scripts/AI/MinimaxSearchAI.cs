@@ -29,13 +29,13 @@ public class MinimaxSearchAI : MonoBehaviour
             agentObjectList.Add(smartEnemy);
 
             // TEMPORARY HARD-CODED VALUES
-            agentList.Add(new Agent(smartEnemy.transform.position, 100, 5, 1, 5, new Vector2(1, 1)));
+            agentList.Add(new Agent(smartEnemy.transform.position, 100, 10, 1, 5, new Vector2(1, 1)));
         }
 
         agentObjectList.Add(player);
 
         // TEMPORARY HARD-CODED VALUES
-        agentList.Add(new Agent(player.transform.position, 100, 5, 5, 5, new Vector2(0.4f, 0.4f)));
+        agentList.Add(new Agent(player.transform.position, 100, 10, 5, 5, new Vector2(0.4f, 0.4f)));
 
         int playerIndex = agentList.Count - 1;
         nextActions = new Action[agentList.Count];

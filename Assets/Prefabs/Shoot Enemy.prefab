@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  sightDistance: 5
+  sightDistance: 8
   moveSpeed: 5
   secondsBetweenAI: 1
 --- !u!114 &49449673974066287
