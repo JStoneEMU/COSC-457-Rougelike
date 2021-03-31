@@ -7,6 +7,7 @@ public class ChaseAI : MonoBehaviour
     public GameObject target;
     public float moveSpeed = 5f;
     public float secondsBetweenAI = 1f;
+    public float followDistance = 0.5f;     // How close the AI will try to get to the target
 
     private List<Vector2Int> path;
     private Vector2 nextPoint;
@@ -49,7 +50,7 @@ public class ChaseAI : MonoBehaviour
 
     void Search()
     {
-        PositionSearchProblem problem = new PositionSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z);
+        PositionSearchProblem problem = new PositionSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z, followDistance);
         path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
         GetNextPoint(transform.position);
 
