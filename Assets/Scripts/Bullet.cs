@@ -6,10 +6,13 @@ public class Bullet : MonoBehaviour
 {
     //public GameObject hitEffect; //For explosion animation
 
+    public GameObject Source { get; set; }   // entity that fired the bullet
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         //GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        if (collision.gameObject != Source)
+            Destroy(gameObject);
         //Destroy(effect, 5f);
     }
 }
