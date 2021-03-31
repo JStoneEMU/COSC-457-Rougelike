@@ -34,9 +34,9 @@ public class AStarSearch<State, Action>
                 closedSet.Add(next.state);
                 List<(State, Action)> successors = problem.GetSuccessors(next.state);
 
-                if (++iterationNum > 1000)
+                if (++iterationNum > 100)
                 {
-                    Debug.Log("A* is iterating too much");
+                    //Debug.Log("A* is iterating too much");
                     break;
                 }
 
