@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5969560799163229547}
   - component: {fileID: 5969560799163229551}
   - component: {fileID: 5969560799163229550}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chase Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

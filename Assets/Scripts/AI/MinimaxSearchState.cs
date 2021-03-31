@@ -133,7 +133,7 @@ namespace Minimax
                 float distance = Vector2.Distance(agent.Position, playerPos);
                 if (distance <= agent.AttackRange)
                 {
-                    int layerMask = 1 << 6; // BlockingLayer (walls etc.)
+                    int layerMask = (1 << 6); // BlockingLayer (walls etc.)
                     Vector2 relativeAttackPos = playerPos - agent.Position;
                     // Check if there's a wall in the way
                     RaycastHit2D hit = Physics2D.Raycast(agent.Position, relativeAttackPos, distance, layerMask);

@@ -45,7 +45,7 @@ public class SightlineSearchProblem : SearchProblem<Vector2Int, Vector2Int>
         // Check if target in range
         if (Vector2.Distance(state, target) <= sightDistance)
         {
-            int layerMask = 1 << 6; // BlockingLayer (walls etc.)
+            int layerMask = (1 << 6); // BlockingLayer (walls etc.)
             Vector2 relativePos = target - state;
             // Check if there's a wall in the way
             RaycastHit2D hit = Physics2D.Raycast(state, relativePos, sightDistance, layerMask);
