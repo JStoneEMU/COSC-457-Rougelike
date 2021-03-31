@@ -7,6 +7,8 @@ TagManager:
   - Item
   - Bullet
   - SmartEnemy
+  - HealthPack
+  - SpeedPowerup
   layers:
   - Default
   - TransparentFX
