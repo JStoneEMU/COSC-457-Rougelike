@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2372744797784181656}
   - component: {fileID: 2060681682825855314}
   - component: {fileID: 399350539}
+  - component: {fileID: 5217895567467728537}
   m_Layer: 7
   m_Name: Smart Enemy
   m_TagString: Untagged
@@ -214,3 +215,15 @@ MonoBehaviour:
   firePoint: {fileID: 1931701212}
   bulletPrefab: {fileID: 7073453591373087493, guid: 55d1274ec6985dc4bb39361362e4aa41, type: 3}
   bulletForce: 20
+--- !u!114 &5217895567467728537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427901539638306725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e9b8a61d68d9748b281a71e81aef42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
