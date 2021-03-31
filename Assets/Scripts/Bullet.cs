@@ -15,4 +15,9 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         //Destroy(effect, 5f);
     }
+
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }
