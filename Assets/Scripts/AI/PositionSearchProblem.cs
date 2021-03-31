@@ -5,18 +5,20 @@ using UnityEngine;
 public class PositionSearchProblem : SearchProblem<Vector2Int, Vector2Int>
 {
     private Vector2Int start;
-    private Vector2Int goal;
+    private Vector2 goal;
     private Vector2 colliderSize;
     private float angle;
     private int moveSpeed;
+    private float followDistance;
 
-    public PositionSearchProblem(Vector2 s, Vector2 g, Vector2 cSize, int speed, float a)
+    public PositionSearchProblem(Vector2 s, Vector2 g, Vector2 cSize, int speed, float a, float follow)
     {
         start = Vector2Int.RoundToInt(s);
-        goal = Vector2Int.RoundToInt(g);
+        goal = g;
         colliderSize = cSize;
         moveSpeed = speed;
         angle = a;
+        followDistance = follow;
     }
 
     public Vector2Int GetStartState()
@@ -34,11 +36,11 @@ public class PositionSearchProblem : SearchProblem<Vector2Int, Vector2Int>
     }
     public float Heuristic(Vector2Int state)
     {
-        return Vector2.Distance(state, goal);
+        return Vector2.Distance(state, goal) - followDistance;
     }
     public bool IsGoalState(Vector2Int state)
     {
-        return (Vector2.Distance(state, goal) <= colliderSize.x);
+        return (Vector2.Distance(state, goal) <= followDistance);
     }
     public List<(Vector2Int, Vector2Int)> GetSuccessors(Vector2Int state)
     {
