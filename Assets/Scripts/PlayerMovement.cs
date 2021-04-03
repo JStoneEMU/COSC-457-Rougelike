@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
 
     private float invincibilityTimer = 0;
 
+    public Animator animator;
+
+    public GameObject character;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -42,6 +46,17 @@ public class PlayerMovement : MonoBehaviour
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
+        animator.SetFloat("Moving", movement.sqrMagnitude);
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            animator.Play("Player_Reload");
+        }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            animator.Play("Player_Shoot");
+        }
+
         if (invincibilityTimer > 0)
             invincibilityTimer -= Time.deltaTime;
 
@@ -58,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);//Time.fixedDeltaTime ensures our movement speed is consistent no matter how many times FixedUpdate is called
 
         Vector2 lookDir = mousePos - rb.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 90f;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
         rb.rotation = angle;
     }
 
@@ -79,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
