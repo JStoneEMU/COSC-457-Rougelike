@@ -10,6 +10,7 @@ TagManager:
   - HealthPack
   - SpeedPowerup
   - Enemy
+  - Stairs
   layers:
   - Default
   - TransparentFX

@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
         //This doodad is for picking up items
         if (other.gameObject.CompareTag("SpeedPowerup"))
@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
             other.gameObject.SetActive(false);
         }
 
-        // take damage when hit by bullet
+        // Take damage when hit by bullet
         if (other.gameObject.tag == "Bullet")
         {
             TakeDamage(1);
