@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         //GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        if (collision.gameObject != Source)
+        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 7)
             Destroy(gameObject);
         //Destroy(effect, 5f);
     }
