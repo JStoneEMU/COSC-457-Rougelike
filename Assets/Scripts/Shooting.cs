@@ -13,6 +13,15 @@ public class Shooting : MonoBehaviour
     public int magStatus = 17;
 
     public float bulletForce = 20f;
+    private AudioSource pistol;
+    private AudioSource reload;
+
+    void Start()
+    {
+        AudioSource[] aSources = GetComponents<AudioSource>();
+        pistol = aSources[0];
+        reload = aSources[1];
+    }
 
     // Update is called once per frame
     void Update()
@@ -21,21 +30,24 @@ public class Shooting : MonoBehaviour
         if (takeInput && Input.GetButtonDown("Fire1"))
         {
             Shoot();
+            pistol.Play();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (magStatus > 0) //Load 1 in chamber plus full mag
             {
                 magStatus = 18;
-
+                reload.Play();
             }
             if (magStatus == 0) //Load full mag
             {
                 magStatus = 17;
+                reload.Play();
             }
             if (magStatus == 18)//Swap full mag for another full mag
             {
                 //Do nothing
+                reload.Play();
             }
         }
     }  

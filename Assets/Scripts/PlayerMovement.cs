@@ -28,10 +28,13 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject character;
 
+    private AudioSource heal;
+
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        heal = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -109,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
             currentHealth = maxHealth;
             healthBar.SetMaxHealth(maxHealth);
             other.gameObject.SetActive(false);
+            heal.Play();
         }
 
         // Take damage when hit by bullet
