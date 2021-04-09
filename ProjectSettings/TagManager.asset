@@ -11,6 +11,9 @@ TagManager:
   - SpeedPowerup
   - Enemy
   - Stairs
+  - NVG
+  - AK
+  - Shotgun
   layers:
   - Default
   - TransparentFX

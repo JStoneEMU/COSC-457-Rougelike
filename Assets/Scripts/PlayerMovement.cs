@@ -30,6 +30,11 @@ public class PlayerMovement : MonoBehaviour
 
     private AudioSource heal;
 
+    public GameObject nightVision;
+
+    public GameObject AKCharacter;
+    public GameObject Shotgun;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -124,6 +129,26 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Finish")
         {
             SceneManager.LoadScene("SampleScene");
+        }
+
+        if (other.gameObject.tag == "NVG")
+        {
+            nightVision.SetActive(true);
+            other.gameObject.SetActive(false);
+        }
+
+        if (other.gameObject.tag == "AK")
+        {
+            
+            other.gameObject.SetActive(false);
+            character.SetActive(false);
+        }
+
+        if (other.gameObject.tag == "Shotgun")
+        {
+            
+            other.gameObject.SetActive(false);
+            character.SetActive(false);
         }
     }
 }

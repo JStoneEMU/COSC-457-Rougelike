@@ -8,6 +8,6 @@ public class SceneScript : MonoBehaviour
     public int sceneNumber;
     void OnTriggerEnter2D()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(sceneNumber);
     }
 }
