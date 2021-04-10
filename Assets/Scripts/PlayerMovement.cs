@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject character;
 
+    private AudioSource pistol;
+    private AudioSource reload;
     private AudioSource heal;
 
     public GameObject nightVision;
@@ -39,7 +41,10 @@ public class PlayerMovement : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        heal = GetComponent<AudioSource>();
+        AudioSource[] aSources = GetComponents<AudioSource>();
+        pistol = aSources[0];
+        reload = aSources[1];
+        heal = aSources[2];
     }
 
     // Update is called once per frame
