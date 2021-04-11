@@ -108,8 +108,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6558729093682786731, guid: 249d1bc4d7e3be44daf1c46de55676bf,
-    type: 3}
+  m_Sprite: {fileID: 6558729093682786731, guid: 249d1bc4d7e3be44daf1c46de55676bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -165,7 +164,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 2.1, y: 2.1}
   m_EdgeRadius: 0
 --- !u!95 &7424779136356972178
 Animator:
@@ -199,8 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 7424779136104479845}
-  bulletPrefab: {fileID: 7073453591373087493, guid: 9929deafc5c48e84481c1ee6bd30835a,
-    type: 3}
+  bulletPrefab: {fileID: 7073453591373087493, guid: 9929deafc5c48e84481c1ee6bd30835a, type: 3}
   moveSpeed: 5
   maxHealth: 10
   bulletForce: 2
