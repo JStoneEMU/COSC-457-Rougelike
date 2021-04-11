@@ -8,24 +8,30 @@ public class Enemy : MonoBehaviour
     public GameObject bulletPrefab;
 
     public float moveSpeed = 5f;
-    public float maxHealth = 10;
+    public float maxHealth = 10f;
     public float bulletForce = 2f;
 
+    // Currently only used for minimax search
+    public int attackRange = 10;
+    public int attackDamage = 10;
+
+    public float CurrentHealth { get; set; }
     // Object being looked at, if null rotation is based on movement
     public GameObject LookingAt { get; set; }
 
     private Rigidbody2D rb;
-    private float currentHealth;
+    private float initialRotation;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
+        transform.rotation.ToAngleAxis(out initialRotation, out var axis);
     }
 
     void Update()
     {
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Destroy(gameObject);
         }
@@ -35,7 +41,7 @@ public class Enemy : MonoBehaviour
             Vector2 lookPos = LookingAt.transform.position;
             Vector2 lookDir = lookPos - rb.position;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
-            rb.rotation = angle;
+            rb.rotation = initialRotation + angle;
         }
     }
 
@@ -45,7 +51,7 @@ public class Enemy : MonoBehaviour
         {
             Vector2 lookDir = point - rb.position;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
-            rb.rotation = angle;
+            rb.rotation = initialRotation + angle;
         }
 
         Vector2 position = transform.position;
@@ -59,7 +65,7 @@ public class Enemy : MonoBehaviour
         {
             Vector2 lookDir = relativeLocation;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
-            rb.rotation = angle;
+            rb.rotation = initialRotation + angle;
         }
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
@@ -81,7 +87,7 @@ public class Enemy : MonoBehaviour
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
             if (bullet != null && bullet.Source != gameObject)
             {
-                currentHealth -= 10;
+                CurrentHealth -= 10;
             }
         }
     }

@@ -28,14 +28,23 @@ public class MinimaxSearchAI : MonoBehaviour
         {
             agentObjectList.Add(smartEnemy);
 
-            // TEMPORARY HARD-CODED VALUES
-            agentList.Add(new Agent(smartEnemy.transform.position, 100, 10, 1, 5, new Vector2(1, 1)));
+            Enemy enemyComponent = smartEnemy.GetComponent<Enemy>();
+            Vector2 position = smartEnemy.transform.position;
+            int health = (int) enemyComponent.CurrentHealth;
+            int range = enemyComponent.attackRange;
+            int damage = enemyComponent.attackDamage;
+            float moveSpeed = enemyComponent.moveSpeed;
+            BoxCollider2D collider = smartEnemy.GetComponent<BoxCollider2D>();
+            Vector2 scale = smartEnemy.transform.localScale;
+            Vector2 colliderSize = collider.size * scale;
+
+            agentList.Add(new Agent(position, health, range, damage, moveSpeed, colliderSize));
         }
 
         agentObjectList.Add(player);
 
         // TEMPORARY HARD-CODED VALUES
-        agentList.Add(new Agent(player.transform.position, 100, 10, 5, 5, new Vector2(0.4f, 0.4f)));
+        agentList.Add(new Agent(player.transform.position, 50, 10, 10, 5, new Vector2(1.323f, 1.323f)));
 
         int playerIndex = agentList.Count - 1;
         nextActions = new Action[agentList.Count];
@@ -158,7 +167,7 @@ public class MinimaxSearchAI : MonoBehaviour
                 spread += minSpread;
         }
 
-        return (sumHealth / 10) - player.Health - sumDistance + (spread / 2);
+        return (sumHealth / 10) - (player.Health) - (sumDistance * 2) + (spread / 2);
 
         //return -player.Health;
     }

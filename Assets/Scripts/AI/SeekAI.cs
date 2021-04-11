@@ -30,9 +30,10 @@ public class SeekAI : MonoBehaviour
         nextPoint = transform.position;
         path = new List<Vector2Int>();
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        colliderSize = collider.size;
+        Vector2 scale = transform.localScale;
+        colliderSize = collider.size * scale;
 
-        Invoke("Search", 1f);
+        Invoke("Search", 0f);
     }
 
     void OnBecameVisible()
@@ -74,7 +75,7 @@ public class SeekAI : MonoBehaviour
     {
         if (visible)
         {
-            SightlineSearchProblem problem = new SightlineSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z, sightDistance);
+            SightlineSearchProblem problem = new SightlineSearchProblem(transform.position, target.transform.position, colliderSize, 1, 0, sightDistance);
             path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
 
             if (path.Count > 0)
