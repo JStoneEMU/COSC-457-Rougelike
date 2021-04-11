@@ -10,6 +10,7 @@ public class MinimaxEnemy : MonoBehaviour
     public float shotCooldown = 2;
 
     public int CurrentHealth { get; set; }
+    public GameObject Player { get; set; }
 
     private Enemy enemyComponent;
     private Vector2 nextPoint;
@@ -74,6 +75,7 @@ public class MinimaxEnemy : MonoBehaviour
             else
             {
                 currentState = State.None;
+                enemyComponent.LookingAt = Player;
             }
         }
     }
@@ -83,6 +85,7 @@ public class MinimaxEnemy : MonoBehaviour
         Vector2 position = transform.position;
         nextPoint = position + relativePos;
         currentState = State.Move;
+        enemyComponent.LookingAt = null;
     }
 
     public void Attack(Vector2 relativePos)

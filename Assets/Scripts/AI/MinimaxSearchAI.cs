@@ -48,6 +48,7 @@ public class MinimaxSearchAI : MonoBehaviour
         for (int i = 0; i < playerIndex; i++)
         {
             MinimaxEnemy enemy = smartEnemyArr[i].GetComponent<MinimaxEnemy>();
+            enemy.Player = player;
             if (enemy != null && nextActions[i] != null)
             {
                 if (nextActions[i].ActionType == Action.Type.Move)

@@ -44,7 +44,8 @@ public class ChaseAI : MonoBehaviour
             GetNextPoint(position);
         }
 
-        enemyComponent.MoveTowards(nextPoint, Time.deltaTime);
+        if (position != nextPoint)
+            enemyComponent.MoveTowards(nextPoint, Time.deltaTime);
     }
 
     void GetNextPoint(Vector2 position)

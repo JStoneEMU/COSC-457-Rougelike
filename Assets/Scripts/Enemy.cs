@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
     public float maxHealth = 10;
     public float bulletForce = 2f;
 
+    // Object being looked at, if null rotation is based on movement
+    public GameObject LookingAt { get; set; }
+
     private Rigidbody2D rb;
     private float currentHealth;
 
@@ -26,17 +29,39 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (LookingAt != null)
+        {
+            Vector2 lookPos = LookingAt.transform.position;
+            Vector2 lookDir = lookPos - rb.position;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
+            rb.rotation = angle;
+        }
     }
 
     public void MoveTowards(Vector2 point, float deltaTime)
     {
+        if (LookingAt == null)
+        {
+            Vector2 lookDir = point - rb.position;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
+            rb.rotation = angle;
+        }
+
         Vector2 position = transform.position;
         position = Vector2.MoveTowards(position, point, moveSpeed * deltaTime);
-        rb.MovePosition(position);
+        rb.MovePosition(position);       
     }
 
     public void ShootAt(Vector2 relativeLocation)
     {
+        if (LookingAt == null)
+        {
+            Vector2 lookDir = relativeLocation;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
+            rb.rotation = angle;
+        }
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
@@ -45,8 +70,8 @@ public class Enemy : MonoBehaviour
             bulletComponent.Source = gameObject;
         }
 
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(relativeLocation * bulletForce, ForceMode2D.Impulse);
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        bulletRb.AddForce(relativeLocation * bulletForce, ForceMode2D.Impulse);
     }
 
     void OnTriggerEnter2D(Collider2D collision)

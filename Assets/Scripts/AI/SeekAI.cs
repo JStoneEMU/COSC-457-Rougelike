@@ -53,7 +53,8 @@ public class SeekAI : MonoBehaviour
             GetNextPoint(position);
         }
 
-        enemyComponent.MoveTowards(nextPoint, Time.deltaTime);
+        if (position != nextPoint)
+            enemyComponent.MoveTowards(nextPoint, Time.deltaTime);
     }
 
     void GetNextPoint(Vector2 position)
@@ -65,7 +66,7 @@ public class SeekAI : MonoBehaviour
             nextPoint = position + nextAction;
 
             if (path.Count == 0)
-                CurrentState = State.Found;
+                FoundState();
         }
     }
 
@@ -78,16 +79,28 @@ public class SeekAI : MonoBehaviour
 
             if (path.Count > 0)
             {
-                CurrentState = State.Seek;
+                SeekState();
             }
             else
             {
-                CurrentState = State.Found;
+                FoundState();
             }
 
             GetNextPoint(transform.position);
         }
 
         Invoke("Search", secondsBetweenAI);
+    }
+
+    void FoundState()
+    {
+        CurrentState = State.Found;
+        enemyComponent.LookingAt = target;
+    }
+
+    void SeekState()
+    {
+        CurrentState = State.Seek;
+        enemyComponent.LookingAt = null;
     }
 }
