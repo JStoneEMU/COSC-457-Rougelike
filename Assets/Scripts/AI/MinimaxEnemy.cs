@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MinimaxEnemy : MonoBehaviour
 {
-    public float moveSpeed = 5f;
     public float attackRange = 5f;
     public int attackDamage = 1;
     public int maxHealth = 10;
@@ -12,8 +11,8 @@ public class MinimaxEnemy : MonoBehaviour
 
     public int CurrentHealth { get; set; }
 
+    private Enemy enemyComponent;
     private Vector2 nextPoint;
-    private Rigidbody2D rb;
     private State currentState = State.None;
     private SeekAI seekComponent;
     private Enemy shootingComponent;
@@ -31,7 +30,7 @@ public class MinimaxEnemy : MonoBehaviour
     {
         seekComponent = GetComponent<SeekAI>();
         shootingComponent = GetComponent<Enemy>();
-        rb = GetComponent<Rigidbody2D>();
+        enemyComponent = GetComponent<Enemy>();
         nextPoint = transform.position;
         CurrentHealth = maxHealth;
     }
@@ -70,8 +69,7 @@ public class MinimaxEnemy : MonoBehaviour
             //if (Vector2.Distance(position, nextPoint) > 0.001)
             if (position != nextPoint)
             {
-                position = Vector2.MoveTowards(position, nextPoint, moveSpeed * Time.deltaTime);
-                rb.MovePosition(position);
+                enemyComponent.MoveTowards(nextPoint, Time.deltaTime);
             }
             else
             {

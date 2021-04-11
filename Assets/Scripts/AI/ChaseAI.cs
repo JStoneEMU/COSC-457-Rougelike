@@ -5,20 +5,19 @@ using UnityEngine;
 public class ChaseAI : MonoBehaviour
 {
     public GameObject target;
-    public float moveSpeed = 5f;
     public float secondsBetweenAI = 1f;
     public float followDistance = 0.5f;     // How close the AI will try to get to the target
 
+    private Enemy enemyComponent;
     private List<Vector2Int> path;
     private Vector2 nextPoint;
-    private Vector2 colliderSize;
-    private Rigidbody2D rb;
+    private Vector2 colliderSize;   
     private bool visible = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        enemyComponent = GetComponent<Enemy>();        
         nextPoint = transform.position;
         path = new List<Vector2Int>();
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
@@ -45,8 +44,7 @@ public class ChaseAI : MonoBehaviour
             GetNextPoint(position);
         }
 
-        position = Vector2.MoveTowards(position, nextPoint, moveSpeed * Time.deltaTime);
-        rb.MovePosition(position);
+        enemyComponent.MoveTowards(nextPoint, Time.deltaTime);
     }
 
     void GetNextPoint(Vector2 position)

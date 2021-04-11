@@ -6,15 +6,14 @@ public class SeekAI : MonoBehaviour
 {
     public GameObject target;
     public float sightDistance = 5f;
-    public float moveSpeed = 5f;
     public float secondsBetweenAI = 1f;
 
     public State CurrentState { get; private set; } = State.Idle;
 
+    private Enemy enemyComponent;
     private List<Vector2Int> path;
     private Vector2 nextPoint;
     private Vector2 colliderSize;
-    private Rigidbody2D rb;
     private bool visible = false;
 
     public enum State
@@ -27,7 +26,7 @@ public class SeekAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        enemyComponent = GetComponent<Enemy>();
         nextPoint = transform.position;
         path = new List<Vector2Int>();
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
@@ -54,8 +53,7 @@ public class SeekAI : MonoBehaviour
             GetNextPoint(position);
         }
 
-        position = Vector2.MoveTowards(position, nextPoint, moveSpeed * Time.deltaTime);
-        rb.MovePosition(position);
+        enemyComponent.MoveTowards(nextPoint, Time.deltaTime);
     }
 
     void GetNextPoint(Vector2 position)
