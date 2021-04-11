@@ -34,11 +34,15 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject nightVision;
 
-    public GameObject AKCharacter;
-    public GameObject Shotgun;
+    public RuntimeAnimatorController anim1;
+    public RuntimeAnimatorController anim2;
+    public RuntimeAnimatorController anim3;
+
+    public int AKInt = 0;
 
     void Start()
     {
+        this.GetComponent<Animator>().runtimeAnimatorController = anim1 as RuntimeAnimatorController;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         AudioSource[] aSources = GetComponents<AudioSource>();
@@ -66,8 +70,8 @@ public class PlayerMovement : MonoBehaviour
             animator.Play("Player_Reload");
         }
         if (Input.GetButtonDown("Fire1"))
-        {
-            animator.Play("Player_Shoot");
+        {  
+        animator.Play("Player_Shoot");   
         }
 
         if (invincibilityTimer > 0)
@@ -141,19 +145,19 @@ public class PlayerMovement : MonoBehaviour
             nightVision.SetActive(true);
             other.gameObject.SetActive(false);
         }
-
         if (other.gameObject.tag == "AK")
         {
-            
-            other.gameObject.SetActive(false);
-            character.SetActive(false);
+            this.GetComponent<Animator>().runtimeAnimatorController = anim2 as RuntimeAnimatorController;
+            character.GetComponent<AKShooting>().enabled = true;
+            character.GetComponent<Shooting>().enabled = false;
+            character.GetComponent<ShotgunShooting>().enabled = false;
+            AKInt = 1;
         }
-
         if (other.gameObject.tag == "Shotgun")
         {
-            
-            other.gameObject.SetActive(false);
-            character.SetActive(false);
+            this.GetComponent<Animator>().runtimeAnimatorController = anim3 as RuntimeAnimatorController;
+            character.GetComponent<ShotgunShooting>().enabled = true;
+            character.GetComponent<Shooting>().enabled = false;
         }
     }
 }

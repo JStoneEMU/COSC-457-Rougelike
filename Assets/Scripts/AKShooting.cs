@@ -16,7 +16,7 @@ public class AKShooting : MonoBehaviour
 
     bool canShoot = true;
 
-    public float shootInterval = 0.3f;
+    public float shootInterval = 0.15f;
 
     // Update is called once per frame
     void Update()

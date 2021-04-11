@@ -633,6 +633,36 @@ Transform:
   m_Father: {fileID: 1115978296}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &163640725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 163640726}
+  m_Layer: 0
+  m_Name: Shotgun FirePoint Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &163640726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163640725}
+  m_LocalRotation: {x: 0, y: 0, z: 0.6427876, w: 0.7660445}
+  m_LocalPosition: {x: 1.239, y: -0.553, z: 1}
+  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1242977525}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 80}
 --- !u!1 &267693256
 GameObject:
   m_ObjectHideFlags: 0
@@ -19937,6 +19967,36 @@ Transform:
   m_Father: {fileID: 357402599}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1012361840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012361841}
+  m_Layer: 0
+  m_Name: Shotgun FirePoint Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012361841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012361840}
+  m_LocalRotation: {x: 0, y: 0, z: 0.76604444, w: 0.64278764}
+  m_LocalPosition: {x: 1.239, y: -0.553, z: 1}
+  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1242977525}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 100}
 --- !u!1001 &1015953861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20010,7 +20070,7 @@ GameObject:
   - component: {fileID: 1038028179}
   - component: {fileID: 1038028178}
   m_Layer: 0
-  m_Name: ak-47
+  m_Name: AK-47
   m_TagString: AK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20112,6 +20172,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3873370801217327610, guid: 21403c6a7d4c591469295fe89866529e, type: 3}
   m_PrefabInstance: {fileID: 3873370801980740733}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1115978294 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3873370801217327607, guid: 21403c6a7d4c591469295fe89866529e, type: 3}
+  m_PrefabInstance: {fileID: 3873370801980740733}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1115978296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3873370801217327605, guid: 21403c6a7d4c591469295fe89866529e, type: 3}
@@ -20153,6 +20218,66 @@ MonoBehaviour:
   magDisplay: {fileID: 734032517}
   magStatus: 4
   bulletForce: 20
+--- !u!1 &1146234385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1146234386}
+  m_Layer: 0
+  m_Name: ' AK FirePoint'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1146234386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146234385}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.239, y: -0.553, z: 1}
+  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1242977525}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &1157288331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1157288332}
+  m_Layer: 0
+  m_Name: Shotgun FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1157288332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157288331}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.239, y: -0.553, z: 1}
+  m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1242977525}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1206826950
 GameObject:
   m_ObjectHideFlags: 0
@@ -20181,7 +20306,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -20539,6 +20664,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1242977523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242977519}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f559ecc216624458c5588b40f34be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takeInput: 1
+  firePoint: {fileID: 1157288332}
+  firePoint2: {fileID: 163640726}
+  firePoint3: {fileID: 1012361841}
+  bulletPrefab: {fileID: 7073453591373087493, guid: 55d1274ec6985dc4bb39361362e4aa41, type: 3}
+  magDisplay: {fileID: 734032517}
+  magStatus: 4
+  bulletForce: 20
+--- !u!114 &1242977524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242977519}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e174191ce11c443845842768bfcbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takeInput: 1
+  firePoint: {fileID: 1146234386}
+  bulletPrefab: {fileID: 7073453591373087493, guid: 55d1274ec6985dc4bb39361362e4aa41, type: 3}
+  magDisplay: {fileID: 734032517}
+  magStatus: 30
+  bulletForce: 20
+  shootInterval: 0.15
 --- !u!4 &1242977525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8476974121175494109, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
@@ -20736,6 +20900,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1242977531 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8476974121175494108, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+  m_PrefabInstance: {fileID: 8476974120023149623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1256727029
 GameObject:
   m_ObjectHideFlags: 0
@@ -76579,6 +76748,11 @@ MonoBehaviour:
   magStatus: 30
   bulletForce: 20
   shootInterval: 0.1
+--- !u!50 &1937565490 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 2267843591355799487, guid: cb0ed46fdbd2a3141a278c4809cd7c6d, type: 3}
+  m_PrefabInstance: {fileID: 2267843592460152951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1937565491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2267843591355799473, guid: cb0ed46fdbd2a3141a278c4809cd7c6d, type: 3}
@@ -77551,9 +77725,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 968763705}
     - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: AKrb
+      value: 
+      objectReference: {fileID: 1937565490}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: AKCam
+      value: 
+      objectReference: {fileID: 145918052}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: anim1
+      value: 
+      objectReference: {fileID: 9100000, guid: f8893c97c92058e488f47e4c37250396, type: 2}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: anim2
+      value: 
+      objectReference: {fileID: 9100000, guid: 9eec2897f18506642aa2c877ebf5d99a, type: 2}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: anim3
+      value: 
+      objectReference: {fileID: 9100000, guid: b712f7babdaea564493d284fea229f63, type: 2}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1242977531}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: Shotgunrb
+      value: 
+      objectReference: {fileID: 1115978294}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1610610228}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: ShotgunCam
+      value: 
+      objectReference: {fileID: 2142378714}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: AKCharacter
+      value: 
+      objectReference: {fileID: 1937565486}
+    - target: {fileID: 8476974121175494096, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
+      propertyPath: ShotgunCharacter
+      value: 
+      objectReference: {fileID: 1115978291}
     - target: {fileID: 8476974121175494097, guid: a4a68ea19bb857740816fa7bafe11906, type: 3}
       propertyPath: m_Name
       value: Handgun Body
