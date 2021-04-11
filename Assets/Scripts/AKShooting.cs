@@ -18,6 +18,23 @@ public class AKShooting : MonoBehaviour
 
     public float shootInterval = 0.15f;
 
+    private AudioSource pistol;
+    private AudioSource reload;
+    private AudioSource heal;
+    private AudioSource shotgun;
+    private AudioSource ak;
+
+    void Start()
+    {
+        AudioSource[] aSources = GetComponents<AudioSource>();
+        pistol = aSources[0];
+        reload = aSources[1];
+        heal = aSources[2];
+        shotgun = aSources[3];
+        ak = aSources[4];
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -25,9 +42,12 @@ public class AKShooting : MonoBehaviour
         if (takeInput && Input.GetButton("Fire1") && canShoot == true)
         {
             StartCoroutine(Shoot());
+            ak.Play();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+            reload.Play();
+            
             if (magStatus > 0) //Load 1 in chamber plus full mag
             {
                 magStatus = 31;
