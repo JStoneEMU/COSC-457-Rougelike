@@ -34,7 +34,7 @@ public class ShootEnemy : MonoBehaviour
             {
                 if (shotTimer <= 0)
                 {
-                    print("Shooting at: " + attackAngle);
+                    //print("Shooting at: " + attackAngle);
                     shootingComponent.ShootAt(attackAngle);
                     shotTimer = shotCooldown;
                 }

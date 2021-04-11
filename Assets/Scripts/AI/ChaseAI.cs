@@ -21,7 +21,8 @@ public class ChaseAI : MonoBehaviour
         nextPoint = transform.position;
         path = new List<Vector2Int>();
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        colliderSize = collider.size;
+        Vector2 scale = transform.localScale;
+        colliderSize = collider.size * scale;
 
         Invoke("Search", 1f);
     }
@@ -62,7 +63,7 @@ public class ChaseAI : MonoBehaviour
     {
         if (visible)
         {
-            PositionSearchProblem problem = new PositionSearchProblem(transform.position, target.transform.position, colliderSize, 1, transform.eulerAngles.z, followDistance);
+            PositionSearchProblem problem = new PositionSearchProblem(transform.position, target.transform.position, colliderSize, 1, 0, followDistance);
             path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
             GetNextPoint(transform.position);          
         }
