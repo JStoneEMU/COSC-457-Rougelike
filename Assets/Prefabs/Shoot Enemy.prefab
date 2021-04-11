@@ -44,8 +44,7 @@ GameObject:
   - component: {fileID: 49449673974066273}
   - component: {fileID: 49449673974066286}
   - component: {fileID: 49449673974066287}
-  - component: {fileID: 1560037596}
-  - component: {fileID: -54857762489823095}
+  - component: {fileID: 3364894358085032823}
   m_Layer: 7
   m_Name: Shoot Enemy
   m_TagString: Enemy
@@ -195,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotCooldown: 2
---- !u!114 &1560037596
+--- !u!114 &3364894358085032823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,22 +203,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 49449673974066284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91b6f4bac3e74bd43a986e4f3536bbd0, type: 3}
+  m_Script: {fileID: 11500000, guid: b03452c1482e81944bf10743912dd26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  takeInput: 0
   firePoint: {fileID: 1812354664}
-  bulletPrefab: {fileID: 7073453591373087493, guid: 55d1274ec6985dc4bb39361362e4aa41, type: 3}
+  bulletPrefab: {fileID: 7073453591373087493, guid: 9929deafc5c48e84481c1ee6bd30835a, type: 3}
   bulletForce: 2
---- !u!114 &-54857762489823095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49449673974066284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99e9b8a61d68d9748b281a71e81aef42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

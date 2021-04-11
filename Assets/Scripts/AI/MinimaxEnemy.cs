@@ -16,7 +16,7 @@ public class MinimaxEnemy : MonoBehaviour
     private Rigidbody2D rb;
     private State currentState = State.None;
     private SeekAI seekComponent;
-    private Shooting shootingComponent;
+    private Enemy shootingComponent;
     private float shotTimer = 0;
 
     enum State
@@ -30,7 +30,7 @@ public class MinimaxEnemy : MonoBehaviour
     void Start()
     {
         seekComponent = GetComponent<SeekAI>();
-        shootingComponent = GetComponent<Shooting>();
+        shootingComponent = GetComponent<Enemy>();
         rb = GetComponent<Rigidbody2D>();
         nextPoint = transform.position;
         CurrentHealth = maxHealth;

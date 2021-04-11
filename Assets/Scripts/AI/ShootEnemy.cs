@@ -10,14 +10,14 @@ public class ShootEnemy : MonoBehaviour
 
     private SeekAI seekComponent;
     private GameObject target;
-    private Shooting shootingComponent;
+    private Enemy shootingComponent;
     private float shotTimer = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         seekComponent = GetComponent<SeekAI>();
-        shootingComponent = GetComponent<Shooting>();
+        shootingComponent = GetComponent<Enemy>();
         if (seekComponent != null)
             target = seekComponent.target;
     }
@@ -29,11 +29,12 @@ public class ShootEnemy : MonoBehaviour
             Vector2 pos = transform.position;
             Vector2 targetPos = target.transform.position;
             Vector2 attackAngle = targetPos - pos;
-            //print("Shooting at: " + attackAngle);
+           
             if (shootingComponent != null)
             {
                 if (shotTimer <= 0)
                 {
+                    print("Shooting at: " + attackAngle);
                     shootingComponent.ShootAt(attackAngle);
                     shotTimer = shotCooldown;
                 }

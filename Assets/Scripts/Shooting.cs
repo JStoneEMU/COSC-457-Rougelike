@@ -26,28 +26,31 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        magDisplay.text = magStatus + "/17";
-        if (takeInput && Input.GetButtonDown("Fire1"))
+        if (takeInput)
         {
-            Shoot();
-            pistol.Play();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (magStatus > 0) //Load 1 in chamber plus full mag
+            magDisplay.text = magStatus + "/17";
+            if (Input.GetButtonDown("Fire1"))
             {
-                magStatus = 18;
-                reload.Play();
+                Shoot();
+                pistol.Play();
             }
-            if (magStatus == 0) //Load full mag
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                magStatus = 17;
-                reload.Play();
-            }
-            if (magStatus == 18)//Swap full mag for another full mag
-            {
-                //Do nothing
-                reload.Play();
+                if (magStatus > 0) //Load 1 in chamber plus full mag
+                {
+                    magStatus = 18;
+                    reload.Play();
+                }
+                if (magStatus == 0) //Load full mag
+                {
+                    magStatus = 17;
+                    reload.Play();
+                }
+                if (magStatus == 18)//Swap full mag for another full mag
+                {
+                    //Do nothing
+                    reload.Play();
+                }
             }
         }
     }  
