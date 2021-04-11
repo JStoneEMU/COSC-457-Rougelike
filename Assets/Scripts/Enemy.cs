@@ -16,11 +16,13 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D rb;
     private float currentHealth;
+    private float initialRotation;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        transform.rotation.ToAngleAxis(out initialRotation, out var axis);
     }
 
     void Update()
@@ -35,7 +37,7 @@ public class Enemy : MonoBehaviour
             Vector2 lookPos = LookingAt.transform.position;
             Vector2 lookDir = lookPos - rb.position;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
-            rb.rotation = angle;
+            rb.rotation = initialRotation + angle;
         }
     }
 
@@ -45,7 +47,7 @@ public class Enemy : MonoBehaviour
         {
             Vector2 lookDir = point - rb.position;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
-            rb.rotation = angle;
+            rb.rotation = initialRotation + angle;
         }
 
         Vector2 position = transform.position;
@@ -59,7 +61,7 @@ public class Enemy : MonoBehaviour
         {
             Vector2 lookDir = relativeLocation;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg + 0f;
-            rb.rotation = angle;
+            rb.rotation = initialRotation + angle;
         }
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
