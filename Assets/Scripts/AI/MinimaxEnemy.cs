@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class MinimaxEnemy : MonoBehaviour
 {
-    public float attackRange = 5f;
-    public int attackDamage = 1;
-    public int maxHealth = 10;
     public float shotCooldown = 2;
 
-    public int CurrentHealth { get; set; }
     public GameObject Player { get; set; }
 
     private Enemy enemyComponent;
@@ -33,7 +29,6 @@ public class MinimaxEnemy : MonoBehaviour
         shootingComponent = GetComponent<Enemy>();
         enemyComponent = GetComponent<Enemy>();
         nextPoint = transform.position;
-        CurrentHealth = maxHealth;
     }
 
     void Update()
