@@ -7,7 +7,23 @@ public class Enemy : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
 
+    public float maxHealth = 10;
     public float bulletForce = 2f;
+
+    private float currentHealth;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
+    void Update()
+    {
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void ShootAt(Vector2 relativeLocation)
     {
@@ -30,7 +46,7 @@ public class Enemy : MonoBehaviour
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
             if (bullet != null && bullet.Source != gameObject)
             {
-                Destroy(gameObject);
+                currentHealth -= 10;
             }
         }
     }
