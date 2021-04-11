@@ -24,7 +24,7 @@ public class ChaseAI : MonoBehaviour
         Vector2 scale = transform.localScale;
         colliderSize = collider.size * scale;
 
-        Invoke("Search", 1f);
+        Invoke("Search", 0f);
     }
 
     void OnBecameVisible()

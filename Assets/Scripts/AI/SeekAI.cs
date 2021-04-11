@@ -33,7 +33,7 @@ public class SeekAI : MonoBehaviour
         Vector2 scale = transform.localScale;
         colliderSize = collider.size * scale;
 
-        Invoke("Search", 1f);
+        Invoke("Search", 0f);
     }
 
     void OnBecameVisible()

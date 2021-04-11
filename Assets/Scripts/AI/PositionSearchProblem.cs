@@ -57,7 +57,6 @@ public class PositionSearchProblem : SearchProblem<Vector2Int, Vector2Int>
                 Collider2D hit = Physics2D.OverlapBox(nextState, colliderSize, angle, layerMask);
                 if (hit != null)
                 {
-                    Debug.Log("checked collider size: " + colliderSize);
                     continue;
                 }
                 successors.Add((nextState, nextAction));
