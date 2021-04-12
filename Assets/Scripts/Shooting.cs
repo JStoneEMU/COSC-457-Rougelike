@@ -13,14 +13,14 @@ public class Shooting : MonoBehaviour
     public int magStatus = 17;
 
     public float bulletForce = 20f;
-    private AudioSource pistol;
-    private AudioSource reload;
+    public AudioSource pistol;
+    public AudioSource reload;
 
     void Start()
     {
-        AudioSource[] aSources = GetComponents<AudioSource>();
+        /*AudioSource[] aSources = GetComponents<AudioSource>();
         pistol = aSources[0];
-        reload = aSources[1];
+        reload = aSources[1];*/
     }
 
     // Update is called once per frame

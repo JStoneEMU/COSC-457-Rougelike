@@ -28,9 +28,9 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject character;
 
-    private AudioSource pistol;
-    private AudioSource reload;
-    private AudioSource heal;
+    public AudioSource pistol;
+    public AudioSource reload;
+    public AudioSource heal;
 
     public GameObject nightVision;
 
@@ -39,16 +39,31 @@ public class PlayerMovement : MonoBehaviour
     public RuntimeAnimatorController anim3;
 
     public int AKInt = 0;
+    public bool hasNVG = false;
+    public bool hasAK = false;
+    public bool hasShotgun = false;
 
     void Start()
     {
         this.GetComponent<Animator>().runtimeAnimatorController = anim1 as RuntimeAnimatorController;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        AudioSource[] aSources = GetComponents<AudioSource>();
+        /*AudioSource[] aSources = GetComponents<AudioSource>();
         pistol = aSources[0];
         reload = aSources[1];
-        heal = aSources[2];
+        heal = aSources[2];*/
+        if (hasNVG == true)
+        {
+            setNVG();
+        }
+        if (hasAK == true)
+        {
+            setAK();
+        }
+        if (hasShotgun == true)
+        {
+            setShotgun();
+        }
     }
 
     // Update is called once per frame
@@ -142,22 +157,40 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.tag == "NVG")
         {
-            nightVision.SetActive(true);
             other.gameObject.SetActive(false);
+            setNVG();
         }
         if (other.gameObject.tag == "AK")
         {
-            this.GetComponent<Animator>().runtimeAnimatorController = anim2 as RuntimeAnimatorController;
-            character.GetComponent<AKShooting>().enabled = true;
-            character.GetComponent<Shooting>().enabled = false;
-            character.GetComponent<ShotgunShooting>().enabled = false;
-            AKInt = 1;
+            other.gameObject.SetActive(false);
+            setAK();
         }
         if (other.gameObject.tag == "Shotgun")
         {
-            this.GetComponent<Animator>().runtimeAnimatorController = anim3 as RuntimeAnimatorController;
-            character.GetComponent<ShotgunShooting>().enabled = true;
-            character.GetComponent<Shooting>().enabled = false;
+            other.gameObject.SetActive(false);
+            setShotgun();
         }
     }
+    private void setAK()
+    {
+        this.GetComponent<Animator>().runtimeAnimatorController = anim2 as RuntimeAnimatorController;
+        character.GetComponent<AKShooting>().enabled = true;
+        character.GetComponent<Shooting>().enabled = false;
+        character.GetComponent<ShotgunShooting>().enabled = false;
+        AKInt = 1;
+        hasAK = true;
+    }
+    private void setShotgun()
+    {
+        this.GetComponent<Animator>().runtimeAnimatorController = anim3 as RuntimeAnimatorController;
+        character.GetComponent<ShotgunShooting>().enabled = true;
+        character.GetComponent<Shooting>().enabled = false;
+        hasShotgun = true;
+    }
+    private void setNVG()
+    {
+        nightVision.SetActive(true);
+        hasNVG = true;
+    }
+
 }

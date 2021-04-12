@@ -16,19 +16,19 @@ public class ShotgunShooting : MonoBehaviour
 
     public float bulletForce = 20f;
 
-    private AudioSource pistol;
-    private AudioSource reload;
-    private AudioSource heal;
-    private AudioSource shotgun;
+    public AudioSource pistol;
+    public AudioSource reload;
+    public AudioSource heal;
+    public AudioSource shotgun;
 
 
     void Start()
     {
-        AudioSource[] aSources = GetComponents<AudioSource>();
+        /*AudioSource[] aSources = GetComponents<AudioSource>();
         pistol = aSources[0];
         reload = aSources[1];
         heal = aSources[2];
-        shotgun = aSources[3];
+        shotgun = aSources[3];*/
     }
 
     // Update is called once per frame

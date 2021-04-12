@@ -18,20 +18,20 @@ public class AKShooting : MonoBehaviour
 
     public float shootInterval = 0.15f;
 
-    private AudioSource pistol;
-    private AudioSource reload;
-    private AudioSource heal;
-    private AudioSource shotgun;
-    private AudioSource ak;
+    public AudioSource pistol;
+    public AudioSource reload;
+    public AudioSource heal;
+    public AudioSource shotgun;
+    public AudioSource ak;
 
     void Start()
     {
-        AudioSource[] aSources = GetComponents<AudioSource>();
+        /*AudioSource[] aSources = GetComponents<AudioSource>();
         pistol = aSources[0];
         reload = aSources[1];
         heal = aSources[2];
         shotgun = aSources[3];
-        ak = aSources[4];
+        ak = aSources[4];*/
     }
 
 
