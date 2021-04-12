@@ -581,7 +581,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   healthBarObj: {fileID: 1430139478023040898}
   moveSpeed: 3
-  maxHealth: 30
+  maxHealth: 40
   bulletForce: 2
   healthBarDuration: 2
   attackRange: 10
