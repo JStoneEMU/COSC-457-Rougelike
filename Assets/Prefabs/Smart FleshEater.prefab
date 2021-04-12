@@ -599,7 +599,7 @@ MonoBehaviour:
   healthBarObj: {fileID: 467719569114315360}
   moveSpeed: 5
   maxHealth: 50
-  bulletForce: 2
+  bulletForce: 1.5
   healthBarDuration: 2
   attackRange: 5
   attackDamage: 10
@@ -630,7 +630,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1844e2941181394da378c9fe26dcdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 5
-  attackDamage: 1
-  maxHealth: 10
   shotCooldown: 2

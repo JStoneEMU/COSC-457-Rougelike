@@ -599,7 +599,7 @@ MonoBehaviour:
   healthBarObj: {fileID: 1511857707028739689}
   moveSpeed: 4
   maxHealth: 20
-  bulletForce: 2
+  bulletForce: 1.2
   healthBarDuration: 2
   attackRange: 10
   attackDamage: 10
