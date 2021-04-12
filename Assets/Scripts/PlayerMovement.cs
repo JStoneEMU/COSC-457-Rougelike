@@ -93,7 +93,10 @@ public class PlayerMovement : MonoBehaviour
             invincibilityTimer -= Time.deltaTime;
 
         if (currentHealth <= 0)
-            SceneManager.LoadScene("SampleScene");
+        {
+            string sceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(sceneName);
+        }
     }
 
     void setSpeed(float speed)
