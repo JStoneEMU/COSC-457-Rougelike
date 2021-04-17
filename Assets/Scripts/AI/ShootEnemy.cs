@@ -24,7 +24,7 @@ public class ShootEnemy : MonoBehaviour
 
     void Update()
     {
-        if (target != null && seekComponent.CurrentState == SeekAI.State.Found)
+        if (seekComponent.Visible && target != null && seekComponent.CurrentState == SeekAI.State.Found)
         {
             Vector2 pos = transform.position;
             Vector2 targetPos = target.transform.position;

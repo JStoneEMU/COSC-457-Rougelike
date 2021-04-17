@@ -9,12 +9,12 @@ public class SeekAI : MonoBehaviour
     public float secondsBetweenAI = 1f;
 
     public State CurrentState { get; private set; } = State.Idle;
+    public bool Visible { get; private set; } = false;
 
     private Enemy enemyComponent;
     private List<Vector2Int> path;
     private Vector2 nextPoint;
     private Vector2 colliderSize;
-    private bool visible = false;
 
     public enum State
     {
@@ -38,12 +38,12 @@ public class SeekAI : MonoBehaviour
 
     void OnBecameVisible()
     {
-        visible = true;
+        Visible = true;
     }
 
     void OnBecameInvisible()
     {
-        visible = false;
+        Visible = false;
     }
 
     void FixedUpdate()
@@ -73,7 +73,7 @@ public class SeekAI : MonoBehaviour
 
     void Search()
     {
-        if (visible)
+        if (Visible)
         {
             SightlineSearchProblem problem = new SightlineSearchProblem(transform.position, target.transform.position, colliderSize, 1, 0, sightDistance);
             path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
