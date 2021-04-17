@@ -564,7 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   secondsBetweenAI: 1
-  followDistance: 1
+  followDistance: 1.4
 --- !u!114 &8827624731939373195
 MonoBehaviour:
   m_ObjectHideFlags: 0
