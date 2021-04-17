@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public int currentHealth;
 
     public HealthBar healthBar;
+    public GameObject deathScreen;
 
     public float invincibilityTimeOnHit = 1;
 
@@ -94,8 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            string sceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(sceneName);
+            Death();
         }
     }
 
@@ -153,10 +152,10 @@ public class PlayerMovement : MonoBehaviour
             TakeDamage(1);
         }
 
-        if (other.gameObject.tag == "Finish")
+/*        if (other.gameObject.tag == "Finish")
         {
             SceneManager.LoadScene("SampleScene");
-        }
+        }*/
 
         if (other.gameObject.tag == "NVG")
         {
@@ -194,6 +193,15 @@ public class PlayerMovement : MonoBehaviour
     {
         nightVision.SetActive(true);
         hasNVG = true;
+    }
+
+    private void Death()
+    {
+        //string sceneName = SceneManager.GetActiveScene().name;
+        //SceneManager.LoadScene(sceneName);
+
+        deathScreen.SetActive(true);
+        gameObject.SetActive(false);
     }
 
 }
