@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneScript : MonoBehaviour
 {
+    public GameObject player;
     public int sceneNumber;
-    void OnTriggerEnter2D()
+    void OnTriggerEnter2D(Collider2D col)
     {
-        SceneManager.LoadScene(sceneNumber);
+        if (col.gameObject == player)
+            SceneManager.LoadScene(sceneNumber);
     }
 }
