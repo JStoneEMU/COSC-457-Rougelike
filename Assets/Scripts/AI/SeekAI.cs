@@ -15,6 +15,7 @@ public class SeekAI : MonoBehaviour
     private Vector2 nextPoint;
     private Vector2 colliderSize;
     private bool visible = false;
+    public AudioSource flesh;
 
     public enum State
     {
@@ -77,7 +78,8 @@ public class SeekAI : MonoBehaviour
         {
             SightlineSearchProblem problem = new SightlineSearchProblem(transform.position, target.transform.position, colliderSize, 1, 0, sightDistance);
             path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
-
+            flesh.Play();
+            
             if (path.Count > 0)
             {
                 SeekState();
@@ -88,6 +90,7 @@ public class SeekAI : MonoBehaviour
             }
 
             GetNextPoint(transform.position);
+            
         }
 
         Invoke("Search", secondsBetweenAI);

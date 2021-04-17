@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     private float initialRotation;
     private HealthBar healthBarScript;
     private float healthBarTimer = 0;
+    
 
     void Start()
     {
@@ -73,7 +74,8 @@ public class Enemy : MonoBehaviour
 
         Vector2 position = transform.position;
         position = Vector2.MoveTowards(position, point, moveSpeed * deltaTime);
-        rb.MovePosition(position);       
+        rb.MovePosition(position);   
+          
     }
 
     public void ShootAt(Vector2 relativeLocation)
