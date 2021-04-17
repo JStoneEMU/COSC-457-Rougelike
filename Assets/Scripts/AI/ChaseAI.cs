@@ -24,6 +24,8 @@ public class ChaseAI : MonoBehaviour
         Vector2 scale = transform.localScale;
         colliderSize = collider.size * scale;
 
+        enemyComponent.LookingAt = target;
+
         Invoke("Search", 0f);
     }
 
@@ -46,7 +48,10 @@ public class ChaseAI : MonoBehaviour
         }
 
         if (position != nextPoint)
-            enemyComponent.MoveTowards(nextPoint, Time.deltaTime);
+        {
+            enemyComponent.LookingAt = null;
+            enemyComponent.MoveTowards(nextPoint, Time.deltaTime);            
+        }
     }
 
     void GetNextPoint(Vector2 position)

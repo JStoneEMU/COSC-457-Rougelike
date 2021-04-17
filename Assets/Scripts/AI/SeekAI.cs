@@ -33,6 +33,8 @@ public class SeekAI : MonoBehaviour
         Vector2 scale = transform.localScale;
         colliderSize = collider.size * scale;
 
+        enemyComponent.LookingAt = target;
+
         Invoke("Search", 0f);
     }
 
