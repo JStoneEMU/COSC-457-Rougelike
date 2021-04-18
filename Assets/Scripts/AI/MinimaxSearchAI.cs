@@ -193,6 +193,6 @@ public class MinimaxSearchAI : MonoBehaviour
             }
         }
 
-        return (sumHealth / 10) - (player.Health * 10) - (sumDistance * 2) + (spread / 2) + moveBonus;
+        return (sumHealth / 10) - (player.Health * 10) - (sumDistance * 4) + (spread / 2) + moveBonus;
     }
 }
