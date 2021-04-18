@@ -123,8 +123,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if (invincibilityTimer <= 0)
             {
-                TakeDamage(1);
-                invincibilityTimer = invincibilityTimeOnHit;
+                Enemy enemyComponent = other.gameObject.GetComponent<Enemy>();
+                if (enemyComponent)
+                {
+                    // enemy damage/health is in multiples of 10 for no good reason, so divided by 10
+                    TakeDamage(enemyComponent.attackDamage / 10);
+                    invincibilityTimer = invincibilityTimeOnHit;
+                }
             }
         }
     }
