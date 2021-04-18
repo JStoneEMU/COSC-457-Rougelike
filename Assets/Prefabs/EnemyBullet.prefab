@@ -213,3 +213,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ef27c9a647e6f49a1095aa06145dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collideWithBullets: 1

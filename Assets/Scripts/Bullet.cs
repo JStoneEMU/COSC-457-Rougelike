@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public bool collideWithBullets = false;
     //public GameObject hitEffect; //For explosion animation
 
     public GameObject Source { get; set; }   // entity that fired the bullet
@@ -11,8 +12,10 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         //GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        if (collision.gameObject != Source && (collision.gameObject.layer == 6 || collision.gameObject.layer == 7 || collision.gameObject.layer == 3))
+        if (collision.gameObject != Source && (collision.gameObject.layer == 6 || collision.gameObject.layer == 7 || (collideWithBullets && collision.gameObject.layer == 3)))
+        {
             Destroy(gameObject);
+        }
         //Destroy(effect, 5f);
     }
 
