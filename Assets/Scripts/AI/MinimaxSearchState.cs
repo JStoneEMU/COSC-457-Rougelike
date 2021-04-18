@@ -14,9 +14,15 @@ namespace Minimax
         public float MoveSpeed { get; set; }
         public Vector2 ColliderSize { get; set; }
 
+        public float ShotTimer { get; set; } = 0;
+        public float ShotCooldown { get; set; } = 0;
+        //public bool MovedThisState { get; set; } = false;
+        public Vector2 PrevPosition { get; set; }
+
         public Agent(Vector2 position, int health, int range, int damage, float moveSpeed, Vector2 colliderSize)
         {
             Position = position;
+            PrevPosition = position;
             Health = health;
             AttackRange = range;
             AttackDamage = damage;
@@ -27,11 +33,14 @@ namespace Minimax
         public Agent(Agent other)
         {
             Position = other.Position;
+            PrevPosition = other.PrevPosition;
             Health = other.Health;
             AttackRange = other.AttackRange;
             AttackDamage = other.AttackDamage;
             MoveSpeed = other.MoveSpeed;
             ColliderSize = other.ColliderSize;
+            ShotTimer = other.ShotTimer;
+            ShotCooldown = other.ShotCooldown;
         }
     }
 
@@ -179,15 +188,30 @@ namespace Minimax
             List<Agent> newAgentList = new List<Agent>(agentList);
             newAgentList[agentIndex] = agent;
 
+            if (agent.ShotTimer > 0)
+                agent.ShotTimer -= timeBetweenStates;
+
+            //agent.MovedThisState = false;
+            agent.PrevPosition = agent.Position;
+
             if (action.ActionType == Action.Type.Attack)
             {
                 Agent target = new Agent(agentList[action.TargetIndex]);
                 newAgentList[action.TargetIndex] = target;
-                target.Health -= agent.AttackDamage;
+                if (agent.ShotTimer <= 0)
+                {
+                    target.Health -= agent.AttackDamage;
+                    agent.ShotTimer = agent.ShotCooldown;
+                }
             }
             else if (action.ActionType == Action.Type.Move)
             {
                 agent.Position += action.Position;
+
+/*                if (action.Position != Vector2.zero)
+                    agent.MovedThisState = true;
+                else
+                    Debug.Log("got here");*/
             }
 
             return new State(newAgentList, playerIndex, timeBetweenStates);

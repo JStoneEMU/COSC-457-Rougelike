@@ -29,6 +29,8 @@ public class MinimaxSearchAI : MonoBehaviour
             agentObjectList.Add(smartEnemy);
 
             Enemy enemyComponent = smartEnemy.GetComponent<Enemy>();
+            MinimaxEnemy minimaxComponent = smartEnemy.GetComponent<MinimaxEnemy>();
+
             Vector2 position = smartEnemy.transform.position;
             int health = (int) enemyComponent.CurrentHealth;
             int range = enemyComponent.attackRange;
@@ -38,7 +40,10 @@ public class MinimaxSearchAI : MonoBehaviour
             Vector2 scale = smartEnemy.transform.localScale;
             Vector2 colliderSize = collider.size * scale;
 
-            agentList.Add(new Agent(position, health, range, damage, moveSpeed, colliderSize));
+            Agent newAgent = new Agent(position, health, range, damage, moveSpeed, colliderSize);
+            newAgent.ShotTimer = minimaxComponent.ShotTimer;
+            newAgent.ShotCooldown = minimaxComponent.shotCooldown;
+            agentList.Add(newAgent);
         }
 
         agentObjectList.Add(player);
@@ -51,7 +56,6 @@ public class MinimaxSearchAI : MonoBehaviour
         State gameState = new State(agentList, playerIndex, secondsBetweenAI);
 
         (float value, Action action) thisV = Value(gameState, 0, 0);
-        //print("Returned: " + thisV.action.Position);
 
         // Give actions to smart enemies
         for (int i = 0; i < playerIndex; i++)
@@ -59,7 +63,7 @@ public class MinimaxSearchAI : MonoBehaviour
             MinimaxEnemy enemy = smartEnemyArr[i].GetComponent<MinimaxEnemy>();
             enemy.Player = player;
             if (enemy != null && nextActions[i] != null)
-            {
+            {              
                 if (nextActions[i].ActionType == Action.Type.Move)
                 {
                     enemy.Move(nextActions[i].Position);
@@ -148,9 +152,14 @@ public class MinimaxSearchAI : MonoBehaviour
         float sumDistance = 0;
         float spread = 0;
         int sumHealth = 0;
+        float moveBonus = 0;
+
         foreach (Agent enemy in enemies)
         {
-            sumDistance += Mathf.Max(enemy.AttackRange, Vector2.Distance(enemy.Position, player.Position));
+            // try to be exactly at max range from player
+            float distance = Vector2.Distance(enemy.Position, player.Position);
+            sumDistance += Mathf.Abs((enemy.AttackRange - 0.5f) - distance);
+
             sumHealth += enemy.Health;
 
             float minSpread = float.PositiveInfinity;
@@ -165,10 +174,25 @@ public class MinimaxSearchAI : MonoBehaviour
 
             if (minSpread != float.PositiveInfinity)
                 spread += minSpread;
+
+            // Can't shoot because it's on cooldown, so prefer states with movement
+            if (enemy.ShotTimer > 0)
+            {
+                if (Vector2.Distance(enemy.Position, enemy.PrevPosition) < 0.5)
+                {
+                    moveBonus -= 100;
+                }
+                else
+                {
+                    moveBonus += 100;
+                }
+            }
+            else
+            {
+                moveBonus -= 200;
+            }
         }
 
-        return (sumHealth / 10) - (player.Health) - (sumDistance * 2) + (spread / 2);
-
-        //return -player.Health;
+        return (sumHealth / 10) - (player.Health * 10) - (sumDistance * 2) + (spread / 2) + moveBonus;
     }
 }

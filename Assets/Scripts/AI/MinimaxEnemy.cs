@@ -13,7 +13,8 @@ public class MinimaxEnemy : MonoBehaviour
     private State currentState = State.None;
     private SeekAI seekComponent;
     private Enemy shootingComponent;
-    private float shotTimer = 0;
+
+    public float ShotTimer { get; private set; } = 0;
 
     enum State
     {
@@ -50,9 +51,9 @@ public class MinimaxEnemy : MonoBehaviour
             }
         }
 
-        if (shotTimer > 0)
+        if (ShotTimer > 0)
         {
-            shotTimer -= Time.deltaTime;
+            ShotTimer -= Time.deltaTime;
         }
     }
 
@@ -87,10 +88,10 @@ public class MinimaxEnemy : MonoBehaviour
     {
         if (shootingComponent != null)
         {
-            if (shotTimer <= 0)
+            if (ShotTimer <= 0)
             {
                 shootingComponent.ShootAt(relativePos);
-                shotTimer = shotCooldown;
+                ShotTimer = shotCooldown;
             }
         }
     }
