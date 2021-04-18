@@ -8,10 +8,12 @@ public class DeathScreen : MonoBehaviour
     public int delay = 1;
 
     private bool ready = false;
+    public AudioSource death;
 
     void Start()
     {
         Invoke("Ready", delay);
+        death.Play();
     }
 
     // Update is called once per frame

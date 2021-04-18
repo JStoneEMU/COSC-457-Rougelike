@@ -31,6 +31,10 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource pistol;
     public AudioSource reload;
     public AudioSource heal;
+    public AudioSource empty;
+    public AudioSource hurt;
+    public AudioSource nvg;
+    
 
     public GameObject nightVision;
 
@@ -95,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
         if (currentHealth <= 0)
         {
             Death();
+           
         }
     }
 
@@ -115,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        hurt.Play();
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -155,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Bullet")
         {
             TakeDamage(1);
+            hurt.Play();
         }
 
 /*        if (other.gameObject.tag == "Finish")
@@ -166,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             setNVG();
+            nvg.Play();
         }
         if (other.gameObject.tag == "AK")
         {
@@ -207,6 +215,7 @@ public class PlayerMovement : MonoBehaviour
 
         deathScreen.SetActive(true);
         gameObject.SetActive(false);
+        
     }
 
 }

@@ -15,6 +15,7 @@ public class Shooting : MonoBehaviour
     public float bulletForce = 20f;
     public AudioSource pistol;
     public AudioSource reload;
+    public AudioSource empty;
 
     void Start()
     {
@@ -31,8 +32,12 @@ public class Shooting : MonoBehaviour
             magDisplay.text = magStatus + "/17";
             if (Input.GetButtonDown("Fire1"))
             {
+                if(magStatus > 0) {
                 Shoot();
                 pistol.Play();
+                } else {
+                    empty.Play();
+                }
             }
             if (Input.GetKeyDown(KeyCode.R))
             {

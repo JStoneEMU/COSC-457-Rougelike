@@ -23,6 +23,7 @@ public class AKShooting : MonoBehaviour
     public AudioSource heal;
     public AudioSource shotgun;
     public AudioSource ak;
+    public AudioSource empty;
 
     void Start()
     {
@@ -41,8 +42,12 @@ public class AKShooting : MonoBehaviour
         magDisplay.text = magStatus + "/30";
         if (takeInput && Input.GetButton("Fire1") && canShoot == true)
         {
+            if(magStatus > 0) {
             StartCoroutine(Shoot());
             ak.Play();
+            } else {
+                empty.Play();
+            }
         }
         if (Input.GetKeyDown(KeyCode.R))
         {

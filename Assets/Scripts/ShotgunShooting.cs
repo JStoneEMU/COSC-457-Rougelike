@@ -20,6 +20,7 @@ public class ShotgunShooting : MonoBehaviour
     public AudioSource reload;
     public AudioSource heal;
     public AudioSource shotgun;
+    public AudioSource empty;
 
 
     void Start()
@@ -37,8 +38,12 @@ public class ShotgunShooting : MonoBehaviour
         magDisplay.text = magStatus + "/4";
         if (takeInput && Input.GetButtonDown("Fire1"))
         {
+            if(magStatus > 0) {
             Shoot();
             shotgun.Play();
+            } else {
+                empty.Play();
+            }
         }
         if (Input.GetKeyDown(KeyCode.R))
         {

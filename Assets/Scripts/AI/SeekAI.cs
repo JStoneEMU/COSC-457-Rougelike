@@ -15,6 +15,7 @@ public class SeekAI : MonoBehaviour
     private List<Vector2Int> path;
     private Vector2 nextPoint;
     private Vector2 colliderSize;
+    public AudioSource enemy;
 
     public enum State
     {
@@ -79,7 +80,7 @@ public class SeekAI : MonoBehaviour
         {
             SightlineSearchProblem problem = new SightlineSearchProblem(transform.position, target.transform.position, colliderSize, 1, 0, sightDistance);
             path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
-
+            enemy.Play();
             if (path.Count > 0)
             {
                 SeekState();

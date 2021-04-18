@@ -13,6 +13,7 @@ public class ChaseAI : MonoBehaviour
     private Vector2 nextPoint;
     private Vector2 colliderSize;   
     private bool visible = false;
+    public AudioSource enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +71,8 @@ public class ChaseAI : MonoBehaviour
         {
             PositionSearchProblem problem = new PositionSearchProblem(transform.position, target.transform.position, colliderSize, 1, 0, followDistance);
             path = AStarSearch<Vector2Int, Vector2Int>.AStar(problem);
-            GetNextPoint(transform.position);          
+            GetNextPoint(transform.position);   
+            enemy.Play();       
         }
         Invoke("Search", secondsBetweenAI);
     }
