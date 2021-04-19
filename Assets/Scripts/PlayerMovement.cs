@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
 
     public Rigidbody2D rb;
-    
+
     Vector2 movement;
 
     public Camera cam;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource empty;
     public AudioSource hurt;
     public AudioSource nvg;
-    
+
 
     public GameObject nightVision;
 
@@ -43,9 +43,10 @@ public class PlayerMovement : MonoBehaviour
     public RuntimeAnimatorController anim3;
 
     public int AKInt = 0;
-    public bool hasNVG = false;
-    public bool hasAK = false;
-    public bool hasShotgun = false;
+    public int NVGCheck;
+    public int ShotgunCheck;
+    public int AKCheck;
+
 
     void Start()
     {
@@ -56,19 +57,23 @@ public class PlayerMovement : MonoBehaviour
         pistol = aSources[0];
         reload = aSources[1];
         heal = aSources[2];*/
-        if (hasNVG == true)
-        {
+        NVGCheck = PlayerPrefs.GetInt("HasNVG", 0);
+        ShotgunCheck = PlayerPrefs.GetInt("HasShotgun", 0);
+        AKCheck = PlayerPrefs.GetInt("HasAK", 0);
+
+        if (NVGCheck == 1)
+            {
             setNVG();
-        }
-        if (hasAK == true)
-        {
+            }
+        if (ShotgunCheck == 1)
+            { 
+            setShotgun(); 
+            }
+        if (AKCheck == 1)
+            {
             setAK();
-        }
-        if (hasShotgun == true)
-        {
-            setShotgun();
-        }
-    }
+            }
+}
 
     // Update is called once per frame
     void Update() //Put all input in here
@@ -193,19 +198,19 @@ public class PlayerMovement : MonoBehaviour
         character.GetComponent<Shooting>().enabled = false;
         character.GetComponent<ShotgunShooting>().enabled = false;
         AKInt = 1;
-        hasAK = true;
+        PlayerPrefs.SetInt("HasAK", 1);
     }
     private void setShotgun()
     {
         this.GetComponent<Animator>().runtimeAnimatorController = anim3 as RuntimeAnimatorController;
         character.GetComponent<ShotgunShooting>().enabled = true;
         character.GetComponent<Shooting>().enabled = false;
-        hasShotgun = true;
+        PlayerPrefs.SetInt("HasShotgun", 1);
     }
     private void setNVG()
     {
         nightVision.SetActive(true);
-        hasNVG = true;
+        PlayerPrefs.SetInt("HasNVG", 1);
     }
 
     private void Death()

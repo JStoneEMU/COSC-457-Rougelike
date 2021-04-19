@@ -8,6 +8,12 @@ public class LevelLoader : MonoBehaviour
     public Animator transition;
     public float transitionTime = 1f;
 
+    public void StartGame()
+    {
+        PlayerPrefs.DeleteAll();
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
     public void PlayGame()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
