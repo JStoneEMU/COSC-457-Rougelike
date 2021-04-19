@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 666770080}
   - component: {fileID: 666770079}
   - component: {fileID: 666770078}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Interior Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11427,7 +11427,7 @@ GameObject:
   - component: {fileID: 1265457219}
   - component: {fileID: 1265457218}
   - component: {fileID: 1265457217}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Invisible Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
